@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Dataflow",
-    "displayName": "PL Data"
+    "type": "UserDataFunction",
+    "displayName": "Update Scenario"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "42ec695c-57fa-b20c-42dd-f58e414b1d70"
+    "logicalId": "c42344e6-8e28-bc13-4272-129b106b1d64"
   }
 }
