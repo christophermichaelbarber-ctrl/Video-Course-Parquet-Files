@@ -51,9 +51,9 @@
       "queryName": "LegalEntitySecurity",
       "loadEnabled": false
     },
-    "FxAssumptions": {
-      "queryId": "ea635117-3f2c-4280-8962-c56c19145bbe",
-      "queryName": "FxAssumptions",
+    "Ledger": {
+      "queryId": "15e7ab87-1d27-460d-812c-6be2c4d0e831",
+      "queryName": "Ledger",
       "loadEnabled": false
     }
   },
