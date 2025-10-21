@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Advanced TMDL Demo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bb23502e-16d1-b3aa-45a2-4cc00a5e4477"
+  }
+}

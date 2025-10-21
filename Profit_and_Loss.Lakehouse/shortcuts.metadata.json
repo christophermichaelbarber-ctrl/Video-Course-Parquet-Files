@@ -1,0 +1,62 @@
+[
+  {
+    "name": "SelectTimeFrame",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/SelectTimeFrame",
+        "itemId": "0a5e4477-4cc0-45a2-b3aa-16d1bb23502e",
+        "workspaceId": "8224d2a0-5a21-4b3a-8f7e-47b600566a2c"
+      }
+    }
+  },
+  {
+    "name": "Scenario",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Scenario",
+        "itemId": "0a5e4477-4cc0-45a2-b3aa-16d1bb23502e",
+        "workspaceId": "8224d2a0-5a21-4b3a-8f7e-47b600566a2c"
+      }
+    }
+  },
+  {
+    "name": "Ledger",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Ledger",
+        "itemId": "0a5e4477-4cc0-45a2-b3aa-16d1bb23502e",
+        "workspaceId": "8224d2a0-5a21-4b3a-8f7e-47b600566a2c"
+      }
+    }
+  },
+  {
+    "name": "Layout",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Layout",
+        "itemId": "0a5e4477-4cc0-45a2-b3aa-16d1bb23502e",
+        "workspaceId": "8224d2a0-5a21-4b3a-8f7e-47b600566a2c"
+      }
+    }
+  },
+  {
+    "name": "Account",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Account",
+        "itemId": "0a5e4477-4cc0-45a2-b3aa-16d1bb23502e",
+        "workspaceId": "8224d2a0-5a21-4b3a-8f7e-47b600566a2c"
+      }
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "Profit_and_Loss"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "249ef314-3644-8738-49e8-19a765a29f0d"
+  }
+}
