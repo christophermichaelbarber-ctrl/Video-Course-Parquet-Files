@@ -1,18 +1,18 @@
 CREATE TABLE [dbo].[Layout] (
-    [Income_Statement_Key]          BIGINT         NULL,
-    [Line name]                     NVARCHAR (MAX) NULL,
-    [Subtotal_From]                 BIGINT         NULL,
-    [Subtotal_To]                   BIGINT         NULL,
-    [Divide_Numerator]              BIGINT         NULL,
-    [Divide_Denominator]            BIGINT         NULL,
-    [Show_Perc]                     BIGINT         NULL,
-    [Format_String_Default]         NVARCHAR (MAX) NULL,
-    [Format_String_Variance_Abs]    NVARCHAR (MAX) NULL,
-    [Format_String_Variance_Per]    NVARCHAR (MAX) NULL,
-    [Formatting P_L.Hex_Text]       NVARCHAR (MAX) NULL,
-    [Formatting P_L.Hex_Background] NVARCHAR (MAX) NULL,
-    [Show_Values]                   BIGINT         NULL,
-    [Calculation_type]              NVARCHAR (MAX) NULL
+    [IncomeStatementKey]      BIGINT         NULL,
+    [LineName]                NVARCHAR (MAX) NULL,
+    [SubtotalFrom]            BIGINT         NULL,
+    [SubtotalTo]              BIGINT         NULL,
+    [DivideNumerator]         BIGINT         NULL,
+    [DivideDenominator]       BIGINT         NULL,
+    [ShowPerc]                BIGINT         NULL,
+    [FormatStringDefault]     NVARCHAR (MAX) NULL,
+    [FormatStringVarianceAbs] NVARCHAR (MAX) NULL,
+    [FormatStringVariancePer] NVARCHAR (MAX) NULL,
+    [FormattingHexText]       NVARCHAR (MAX) NULL,
+    [FormattingHexBackground] NVARCHAR (MAX) NULL,
+    [ShowValues]              BIGINT         NULL,
+    [CalculationType]         NVARCHAR (MAX) NULL
 );
 
 

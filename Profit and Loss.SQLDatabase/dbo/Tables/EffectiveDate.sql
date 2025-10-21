@@ -1,5 +1,5 @@
 CREATE TABLE [dbo].[EffectiveDate] (
-    [Fiscal Date]               DATE           NULL,
+    [FiscalDate]                DATE           NULL,
     [Fiscal Year]               BIGINT         NULL,
     [Fiscal Quarter]            NVARCHAR (MAX) NULL,
     [Fiscal Period]             NVARCHAR (MAX) NULL,

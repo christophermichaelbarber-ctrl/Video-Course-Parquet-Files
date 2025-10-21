@@ -11,15 +11,9 @@
       "isHidden": true,
       "loadEnabled": false
     },
-    "Scenario": {
-      "queryId": "086f1007-4342-4c42-9f14-4b4986fc789f",
-      "queryName": "Scenario",
-      "loadEnabled": false
-    },
     "ScenarioBase": {
       "queryId": "11434cb8-2003-4e10-9a28-0606f1565307",
-      "queryName": "ScenarioBase",
-      "loadEnabled": false
+      "queryName": "ScenarioBase"
     },
     "Layout": {
       "queryId": "4caec944-4e21-4034-8b95-79119861ec42",
@@ -28,8 +22,7 @@
     },
     "EffectiveDate": {
       "queryId": "7a581245-69f6-43d0-8df0-5cb3aa4b17e6",
-      "queryName": "EffectiveDate",
-      "loadEnabled": false
+      "queryName": "EffectiveDate"
     },
     "Account": {
       "queryId": "273338eb-5032-47d3-98f9-9f2e53af3a12",
@@ -54,6 +47,11 @@
     "Ledger": {
       "queryId": "15e7ab87-1d27-460d-812c-6be2c4d0e831",
       "queryName": "Ledger",
+      "loadEnabled": false
+    },
+    "Scenario": {
+      "queryId": "086f1007-4342-4c42-9f14-4b4986fc789f",
+      "queryName": "Scenario",
       "loadEnabled": false
     }
   },
