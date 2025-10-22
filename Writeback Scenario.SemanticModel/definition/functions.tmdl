@@ -1,0 +1,57 @@
+/// AddTax takes in amount and returns amount including tax
+function __Fn_PnL_Step1_Sum_and_Subtotal =
+		(
+		    amount: EXPR
+		) =>
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount * MAX( 'Account'[Account Type Indicator] )
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount * MAX( 'Account'[Account Type Indicator]),
+		        NCLD_filter_context_calculated_table
+		    )
+		
+		VAR result =  COALESCE( step1_lineitem, step2_subtotal )
+		RETURN
+		    result
+	lineageTag: 91086c31-5be6-45a0-a15d-c3f3df001017
+
+/// Creates the P&L Lines
+function __Fn_PnL_Sum_Subtotal_and_Blanks =
+		(
+		    amount: EXPR
+		) =>
+		VAR accountinscope = ISFILTERED( Account )
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount * MAX( 'Account'[Account Type Indicator] )
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount * MAX( 'Account'[Account Type Indicator]),
+		        NCLD_filter_context_calculated_table
+		    )
+		VAR step3_addblanks =
+		    SWITCH(
+		        TRUE( ),
+		        accountinscope, BLANK( ),
+		        SELECTEDVALUE( Layout[Calculationtype] ) = "Blank", 0
+		    )
+		VAR step3_add_zero =
+		    COALESCE( step1_lineitem, step2_subtotal, step3_addblanks )
+		RETURN
+		    step3_add_zero
+	lineageTag: f5c144dd-ef92-4687-bc9b-f159843c29a7
+

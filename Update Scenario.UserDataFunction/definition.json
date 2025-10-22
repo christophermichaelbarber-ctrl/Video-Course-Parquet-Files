@@ -11,7 +11,7 @@
   ],
   "functions": [
     {
-      "name": "hello_fabric",
+      "name": "write_one_to_sql_db",
       "description": "",
       "isPublicEndpointEnabled": true
     }

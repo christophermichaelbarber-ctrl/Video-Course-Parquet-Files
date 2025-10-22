@@ -1,0 +1,77 @@
+table Account
+	lineageTag: 352284e2-d909-4822-9c5d-c9513edc8776
+	sourceLineageTag: [dbo].[Account]
+
+	column 'Account Key'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 4fe57977-a634-437f-83d0-b0619f0b8f59
+		sourceLineageTag: Account Key
+		summarizeBy: none
+		sourceColumn: Account Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Number and Name'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 88135db2-c3bd-4735-8fc9-cd44b4c9e7b8
+		sourceLineageTag: Account Number and Name
+		summarizeBy: none
+		sourceColumn: Account Number and Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6e101076-db93-4854-8d58-e7249cb253a2
+		sourceLineageTag: Account Type
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type Indicator'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 4ff3754c-a416-4853-ada7-030756547116
+		sourceLineageTag: Account Type Indicator
+		summarizeBy: sum
+		sourceColumn: Account Type Indicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income_Statement_Key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 81b9695c-ee73-4725-a61d-19396e7c3d47
+		sourceLineageTag: Income_Statement_Key
+		summarizeBy: none
+		sourceColumn: Income_Statement_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_78623323
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: e83aff0a-6699-4410-bdf0-c60257dc2660
+		sourceLineageTag: MSSQL_System_Uniquifier_78623323
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_78623323
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Account = entity
+		mode: directLake
+		source
+			entityName: Account
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

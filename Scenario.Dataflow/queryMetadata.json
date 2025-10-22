@@ -1,0 +1,32 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Dataflow 1",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Scenario": {
+      "queryId": "4baba9a7-a5d0-499e-9d06-e216ddfda9d2",
+      "queryName": "Scenario",
+      "loadEnabled": false
+    },
+    "Scenario_DataDestination": {
+      "queryId": "a2fc24ef-9a92-419b-ab8e-80a4636d7c4e",
+      "queryName": "Scenario_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"2bfa280f-07f5-47a6-b2a3-502fe4ece0e9\",\"DatasourceId\":\"a291ecf7-b38e-48f0-8365-b2f42370bc77\"}"
+    },
+    {
+      "path": "FabricSql",
+      "kind": "FabricSql",
+      "connectionId": "{\"ClusterId\":\"2bfa280f-07f5-47a6-b2a3-502fe4ece0e9\",\"DatasourceId\":\"cbd93c8e-9e24-4c99-8f21-05f857e056e3\"}"
+    }
+  ]
+}

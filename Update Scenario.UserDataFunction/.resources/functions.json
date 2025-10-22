@@ -2,7 +2,7 @@
   "runtime": "PYTHON",
   "functionsMetadata": [
     {
-      "name": "hello_fabric",
+      "name": "write_one_to_sql_db",
       "scriptFile": "function_app.py",
       "bindings": [
         {
@@ -11,18 +11,43 @@
           "direction": "In",
           "authLevel": "Anonymous",
           "methods": [
-            "post"
+            "POST"
           ],
-          "route": "hello_fabric"
+          "route": ""
+        },
+        {
+          "name": "dbo",
+          "type": "FabricItem",
+          "direction": "In",
+          "alias": "ProfitandLoss",
+          "subType": "FabricSqlConnection",
+          "itemType": null,
+          "audienceType": null
         }
       ],
       "fabricProperties": {
-        "fabricMetadataSchemaVersion": null,
+        "fabricMetadataSchemaVersion": "1.1.0",
         "fabricFunctionReturnType": "str",
         "fabricFunctionParameters": [
           {
-            "name": "name",
+            "name": "EffectiveDate",
             "dataType": "str"
+          },
+          {
+            "name": "AccountKey",
+            "dataType": "int"
+          },
+          {
+            "name": "ScenarioKey",
+            "dataType": "int"
+          },
+          {
+            "name": "LegalEntityKey",
+            "dataType": "int"
+          },
+          {
+            "name": "Creditlessdebit",
+            "dataType": "int"
           }
         ]
       }

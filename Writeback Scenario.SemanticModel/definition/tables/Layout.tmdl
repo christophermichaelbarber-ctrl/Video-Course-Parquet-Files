@@ -1,0 +1,197 @@
+table Layout
+	lineageTag: 7569c451-0bdf-4749-83dc-578203a6fc89
+	sourceLineageTag: [dbo].[Layout]
+
+	measure 'Line Name Background' = ```
+			CALCULATE(
+			    SELECTEDVALUE(
+			        'Layout'[FormattingHexBackground]            
+			    )
+			)
+			```
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: 0f7d50c6-4d70-427d-aaeb-bc451cacad00
+
+		changedProperty = IsHidden
+
+	measure 'Line Name Font' =
+			CALCULATE(
+			    SELECTEDVALUE(
+			        'Layout'[FormattingHexText]
+			    )
+			)
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: dd0d4615-36c8-4ee9-ab33-df488de1401b
+
+		changedProperty = IsHidden
+
+	column IncomeStatementKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 026b3e9a-7290-40c9-bb44-e4239a56cc1a
+		sourceLineageTag: IncomeStatementKey
+		summarizeBy: none
+		sourceColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 48fa0411-9dea-4df7-8d15-8cc5d7f8e5dd
+		sourceLineageTag: LineName
+		summarizeBy: none
+		sourceColumn: LineName
+		sortByColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalFrom
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: aa33c10d-d274-486f-b6e3-c8c5ac31538f
+		sourceLineageTag: SubtotalFrom
+		summarizeBy: none
+		sourceColumn: SubtotalFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalTo
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 137d6b91-66da-4a81-b6e5-f55925c40e4f
+		sourceLineageTag: SubtotalTo
+		summarizeBy: none
+		sourceColumn: SubtotalTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideNumerator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: cadfa9c9-6220-421a-9b7b-43b904ec5a27
+		sourceLineageTag: DivideNumerator
+		summarizeBy: none
+		sourceColumn: DivideNumerator
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideDenominator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2353cc05-6d99-4469-b1e6-0e8190435295
+		sourceLineageTag: DivideDenominator
+		summarizeBy: none
+		sourceColumn: DivideDenominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowValues
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 78ed13ed-3f41-4d4b-8076-ed0be6dc803f
+		sourceLineageTag: ShowValues
+		summarizeBy: none
+		sourceColumn: ShowValues
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalculationType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cb5f1c39-8142-46c8-b500-61ec8dc3483a
+		sourceLineageTag: CalculationType
+		summarizeBy: none
+		sourceColumn: CalculationType
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_2098106515
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ea85cb7a-9449-4197-ba0b-13c30f623709
+		sourceLineageTag: MSSQL_System_Uniquifier_2098106515
+		summarizeBy: none
+		sourceColumn: MSSQL_System_Uniquifier_2098106515
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPerc
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5d691036-b1c0-4ba9-afb7-16fe9974464e
+		sourceLineageTag: ShowPerc
+		summarizeBy: none
+		sourceColumn: ShowPerc
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringDefault
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c3b79020-bb45-4041-a43c-3b1cdf49e853
+		sourceLineageTag: FormatStringDefault
+		summarizeBy: none
+		sourceColumn: FormatStringDefault
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVarianceAbs
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7e880fec-281e-43b5-bcab-9b62cd6dfce4
+		sourceLineageTag: FormatStringVarianceAbs
+		summarizeBy: none
+		sourceColumn: FormatStringVarianceAbs
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVariancePer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 53373176-3478-4331-9b85-4b84f2ca0d85
+		sourceLineageTag: FormatStringVariancePer
+		summarizeBy: none
+		sourceColumn: FormatStringVariancePer
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexText
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: be4b0d45-1ffb-4cd2-82b8-952840111d54
+		sourceLineageTag: FormattingHexText
+		summarizeBy: none
+		sourceColumn: FormattingHexText
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexBackground
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b6dc12d6-f01d-4f99-903f-62316c8a0c1d
+		sourceLineageTag: FormattingHexBackground
+		summarizeBy: none
+		sourceColumn: FormattingHexBackground
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Layout = entity
+		mode: directLake
+		source
+			entityName: Layout
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

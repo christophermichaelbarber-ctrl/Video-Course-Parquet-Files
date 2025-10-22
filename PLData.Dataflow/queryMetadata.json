@@ -11,10 +11,9 @@
       "isHidden": true,
       "loadEnabled": false
     },
-    "ScenarioBase": {
+    "Scenario": {
       "queryId": "11434cb8-2003-4e10-9a28-0606f1565307",
-      "queryName": "ScenarioBase",
-      "loadEnabled": false
+      "queryName": "Scenario"
     },
     "EffectiveDate": {
       "queryId": "7a581245-69f6-43d0-8df0-5cb3aa4b17e6",
@@ -26,9 +25,15 @@
       "queryName": "Account",
       "loadEnabled": false
     },
-    "Scenario": {
+    "Scenario_No_Longer_Req": {
       "queryId": "086f1007-4342-4c42-9f14-4b4986fc789f",
-      "queryName": "Scenario",
+      "queryName": "Scenario_No_Longer_Req",
+      "loadEnabled": false
+    },
+    "Scenario_DataDestination": {
+      "queryId": "f9a1a17e-8b47-42f2-b774-6575bb93fd05",
+      "queryName": "Scenario_DataDestination",
+      "isHidden": true,
       "loadEnabled": false
     }
   },
@@ -37,6 +42,11 @@
       "path": "FabricSql",
       "kind": "FabricSql",
       "connectionId": "{\"ClusterId\":\"2bfa280f-07f5-47a6-b2a3-502fe4ece0e9\",\"DatasourceId\":\"cbd93c8e-9e24-4c99-8f21-05f857e056e3\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"2bfa280f-07f5-47a6-b2a3-502fe4ece0e9\",\"DatasourceId\":\"a291ecf7-b38e-48f0-8365-b2f42370bc77\"}"
     }
   ]
 }
