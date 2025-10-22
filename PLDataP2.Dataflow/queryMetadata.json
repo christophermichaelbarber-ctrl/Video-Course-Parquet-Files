@@ -1,0 +1,56 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "PLDataP2",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Layout": {
+      "queryId": "1d8ce3d1-e5ac-4d5b-9e82-610002e794aa",
+      "queryName": "Layout"
+    },
+    "Layout_DataDestination": {
+      "queryId": "84d46d99-e578-4634-acea-db8cff052c98",
+      "queryName": "Layout_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Legal Entity": {
+      "queryId": "56a1804e-ba1c-4dd4-9644-14a707401875",
+      "queryName": "Legal Entity"
+    },
+    "Ledger": {
+      "queryId": "35a53386-24b1-4cdd-b8b6-45d6547c3ad0",
+      "queryName": "Ledger"
+    },
+    "Legal Entity_DataDestination": {
+      "queryId": "be8475e5-93e0-476e-9793-8ee83c3d266c",
+      "queryName": "Legal Entity_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Ledger_DataDestination": {
+      "queryId": "f00d8932-055a-4503-a78b-e80eb98f79e4",
+      "queryName": "Ledger_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "SelectedTimeFrame": {
+      "queryId": "2f452a30-6130-47c3-a7d0-eedccfe8b26a",
+      "queryName": "SelectedTimeFrame"
+    },
+    "SelectedTimeFrame_DataDestination": {
+      "queryId": "75f26989-770a-40d1-b1eb-6fcb0d1f7750",
+      "queryName": "SelectedTimeFrame_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"2bfa280f-07f5-47a6-b2a3-502fe4ece0e9\",\"DatasourceId\":\"a291ecf7-b38e-48f0-8365-b2f42370bc77\"}"
+    }
+  ]
+}

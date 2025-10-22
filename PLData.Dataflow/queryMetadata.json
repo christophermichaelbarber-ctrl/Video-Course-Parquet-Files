@@ -13,40 +13,17 @@
     },
     "ScenarioBase": {
       "queryId": "11434cb8-2003-4e10-9a28-0606f1565307",
-      "queryName": "ScenarioBase"
-    },
-    "Layout": {
-      "queryId": "4caec944-4e21-4034-8b95-79119861ec42",
-      "queryName": "Layout",
+      "queryName": "ScenarioBase",
       "loadEnabled": false
     },
     "EffectiveDate": {
       "queryId": "7a581245-69f6-43d0-8df0-5cb3aa4b17e6",
-      "queryName": "EffectiveDate"
+      "queryName": "EffectiveDate",
+      "loadEnabled": false
     },
     "Account": {
       "queryId": "273338eb-5032-47d3-98f9-9f2e53af3a12",
       "queryName": "Account",
-      "loadEnabled": false
-    },
-    "LegalEntity": {
-      "queryId": "83e7e21d-1608-44f7-9ffe-0c00180caf01",
-      "queryName": "LegalEntity",
-      "loadEnabled": false
-    },
-    "SelectedTimeFrame": {
-      "queryId": "071060ff-eba3-4df6-9fa9-5bf16db093f5",
-      "queryName": "SelectedTimeFrame",
-      "loadEnabled": false
-    },
-    "LegalEntitySecurity": {
-      "queryId": "a3c61f6e-b900-4098-b1a8-39c959a24a14",
-      "queryName": "LegalEntitySecurity",
-      "loadEnabled": false
-    },
-    "Ledger": {
-      "queryId": "15e7ab87-1d27-460d-812c-6be2c4d0e831",
-      "queryName": "Ledger",
       "loadEnabled": false
     },
     "Scenario": {
