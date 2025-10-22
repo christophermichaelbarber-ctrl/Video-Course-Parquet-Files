@@ -1,0 +1,83 @@
+table Scenario
+	lineageTag: b1a40989-0e22-4b0a-820a-ad18878e8d14
+
+	measure Date = CONVERT( CALCULATE( MAX( 'effectivedate'[FiscalDate] ) ), STRING )
+		lineageTag: 5a0d17e6-f9c3-48a4-aed1-6cc79fa87cec
+
+	measure Scenario = __Fn_PnL_Sum_Subtotal_and_Blanks( CALCULATE( SUM( Scenario[Creditlessdebit] ) ) )
+		formatString: #,###;-#,###;
+		lineageTag: 8d590a9e-5377-4425-9494-916d8eb355f7
+
+	column EffectiveDate
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 37b3c3c3-3525-4c76-baac-d34faa440044
+		summarizeBy: none
+		sourceColumn: EffectiveDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column AccountKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: bc3bc6e2-fa2c-4e4a-a3f8-36bc85176922
+		summarizeBy: count
+		sourceColumn: AccountKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7c5d04a2-3004-48c5-b994-d3ec677db221
+		summarizeBy: count
+		sourceColumn: ScenarioKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LegalEntityKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 41e596ee-ed83-4e9e-9c85-cc53a637c0ca
+		summarizeBy: count
+		sourceColumn: LegalEntityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Creditlessdebit
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5aeed5b9-bf5f-4ef2-9810-7f2fed6e2969
+		summarizeBy: sum
+		sourceColumn: Creditlessdebit
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioPK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a67a4bd3-0a36-4dd7-9e74-f5423154c614
+		summarizeBy: sum
+		sourceColumn: ScenarioPK
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Scenario = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Scenario = Source{[Schema="dbo",Item="Scenario"]}[Data]
+				in
+				    dbo_Scenario
+
+	annotation PBI_ResultType = Table
+

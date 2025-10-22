@@ -1,0 +1,32 @@
+/// Creates the P&L Lines
+function __Fn_PnL_Sum_Subtotal_and_Blanks =
+		(
+		    amount: EXPR
+		) =>
+		VAR accountinscope = ISFILTERED( Account )
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount //* MAX( 'Account'[Account Type Indicator] )
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount //* MAX( 'Account'[Account Type Indicator]),
+		        ,NCLD_filter_context_calculated_table
+		    )
+		VAR step3_addblanks =
+		    SWITCH(
+		        TRUE( ),
+		        accountinscope, BLANK( ),
+		        SELECTEDVALUE( Layout[Calculationtype] ) = "Blank", 0
+		    )
+		VAR step3_add_zero =
+		    COALESCE( step1_lineitem, step2_subtotal, step3_addblanks )
+		RETURN
+		    step3_add_zero
+	lineageTag: 70aee319-388a-422d-9506-8feea34aa09f
+

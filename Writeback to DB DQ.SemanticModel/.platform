@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Writeback to DB DQ"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e5890fc9-37b3-8e46-418c-eea39ee35631"
+  }
+}

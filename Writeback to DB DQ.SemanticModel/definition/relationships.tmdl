@@ -1,0 +1,16 @@
+relationship 96bb1751-832b-fa60-2f80-d2bb90435e92
+	fromColumn: Account.Income_Statement_Key
+	toColumn: Layout.IncomeStatementKey
+
+relationship f35ecd5d-8046-5a38-ba1f-4612d53c2507
+	fromColumn: Scenario.AccountKey
+	toColumn: Account.'Account Key'
+
+relationship f2083703-77c5-76b0-e904-0da8413e3ed5
+	fromColumn: Scenario.EffectiveDate
+	toColumn: EffectiveDate.FiscalDate
+
+relationship 4ba663c4-a17d-489b-9bd6-f0c73118b526
+	fromColumn: Scenario.LegalEntityKey
+	toColumn: LegalEntity.'Legal Entity Key'
+

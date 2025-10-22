@@ -1,0 +1,62 @@
+table Account
+	lineageTag: 9f0278df-ce93-4821-8240-92f5ad1e23b9
+
+	column 'Account Key'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0ccd6237-1ec4-4882-9dc2-eda371e330b8
+		summarizeBy: count
+		sourceColumn: Account Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Number and Name'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: e3261fc5-dce4-403a-8e82-d80bb4b83def
+		summarizeBy: none
+		sourceColumn: Account Number and Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 433a21bb-9732-4ba4-9b4e-222ff5bdf5c6
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type Indicator'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 3e9f4197-3c6c-4586-9a2d-88a97d3fa8e2
+		summarizeBy: sum
+		sourceColumn: Account Type Indicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income_Statement_Key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2ec2dd67-b484-4d85-9594-d909d1b619e7
+		summarizeBy: count
+		sourceColumn: Income_Statement_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Account = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Account = Source{[Schema="dbo",Item="Account"]}[Data]
+				in
+				    dbo_Account
+
+	annotation PBI_ResultType = Table
+

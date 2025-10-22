@@ -1,0 +1,173 @@
+table Layout
+	lineageTag: 0fe0bc6a-c1d9-4e6a-a8d1-be5169ce270e
+
+	measure 'Line Name Background' = ```
+			CALCULATE(
+			    SELECTEDVALUE(
+			        'Layout'[FormattingHexBackground]            
+			    )
+			)
+			```
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: 4c344668-15a2-43f8-8a19-b5d4a063ff51
+
+		changedProperty = IsHidden
+
+	measure 'Line Name Font' =
+			CALCULATE(
+			    SELECTEDVALUE(
+			        'Layout'[FormattingHexText]
+			    )
+			)
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: 66d86842-4bb3-4051-84b6-80dc9c920f7f
+
+		changedProperty = IsHidden
+
+	column IncomeStatementKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5ad839a1-24ef-4bfa-84a4-3a5d8878ffa1
+		summarizeBy: count
+		sourceColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineName
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: e3fb1da5-98ec-429b-95b7-f6f530874a03
+		summarizeBy: none
+		sourceColumn: LineName
+		sortByColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalFrom
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: e81dfdac-8512-4f35-a828-51dac3e460d5
+		summarizeBy: sum
+		sourceColumn: SubtotalFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalTo
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d8bf9bc3-42ca-4266-aec3-be863aefd130
+		summarizeBy: sum
+		sourceColumn: SubtotalTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideNumerator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: cd4d73f7-51a6-4d4e-9004-cf3398b90536
+		summarizeBy: sum
+		sourceColumn: DivideNumerator
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideDenominator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 258f8781-ec24-4922-8472-cc56642fbf07
+		summarizeBy: sum
+		sourceColumn: DivideDenominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPerc
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 948c096b-7f1b-4e57-a5fa-6cca97ee6a07
+		summarizeBy: sum
+		sourceColumn: ShowPerc
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringDefault
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 16b2ad01-1d18-4325-ab36-2b322ff9d7f9
+		summarizeBy: none
+		sourceColumn: FormatStringDefault
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVarianceAbs
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fb939717-3129-482a-a378-9702072c4fe9
+		summarizeBy: none
+		sourceColumn: FormatStringVarianceAbs
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVariancePer
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3f8c9e46-06b5-4b2e-9144-f97de3fd37c2
+		summarizeBy: none
+		sourceColumn: FormatStringVariancePer
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexText
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8c9d0539-7558-4ebb-895d-befef26ea8fc
+		summarizeBy: none
+		sourceColumn: FormattingHexText
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexBackground
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 74f58a8f-7c55-46ad-9a1d-60f563c2dd16
+		summarizeBy: none
+		sourceColumn: FormattingHexBackground
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowValues
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: fa3a958b-56f2-4fe5-940f-7645f485cab3
+		summarizeBy: sum
+		sourceColumn: ShowValues
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalculationType
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: c563172a-044d-4e35-877d-0c4c5f6ae24d
+		summarizeBy: none
+		sourceColumn: CalculationType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Layout = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Layout = Source{[Schema="dbo",Item="Layout"]}[Data]
+				in
+				    dbo_Layout
+
+	annotation PBI_ResultType = Table
+
