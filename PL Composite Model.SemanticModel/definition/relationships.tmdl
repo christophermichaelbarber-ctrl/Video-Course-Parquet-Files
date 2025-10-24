@@ -42,3 +42,15 @@ relationship 55af0bb1-21cd-48a8-91d8-371504904cc6
 	fromColumn: '__Field Paramater Self-Service Table Measures'.Selected_Measures_Key
 	toColumn: FxAssumptions.FxAssumptionSortOrder
 
+relationship 82d10a1e-b7ee-4fd4-96e8-2343a4a361d5
+	fromColumn: Commentary.Date
+	toColumn: EffectiveDate.FiscalDate
+
+relationship bee802e7-edf8-43c8-abe3-90d466c5c82a
+	fromColumn: Commentary.FxAssumptionsKey
+	toColumn: FxAssumptions.FxAssumptionSortOrder
+
+relationship a4534c6a-fae2-486a-99e7-16389c962deb
+	fromColumn: Commentary.TimeHorizonKey
+	toColumn: SelectedTimeFrame.'Time Horizon Sort Order'
+

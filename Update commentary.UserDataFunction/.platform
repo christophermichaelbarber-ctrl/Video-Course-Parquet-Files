@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "UserDataFunction",
+    "displayName": "Update commentary"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ca41fb13-fd1a-8613-4109-88c1666a1fe6"
+  }
+}

@@ -843,28 +843,39 @@ table _Measures_Hidden
 		changedProperty = IsHidden
 
 	measure 'Show Commentary' = ```
-			VAR isfiltered_region = ISFILTERED('legalentity'[Region])
-			VAR isfiltered_country = ISFILTERED('legalentity'[Country])
-			VAR isfiltered_le = ISFILTERED(legalentity[Legal entity name])
-			VAR grouprecord = CALCULATE( MAX( Commentary[CommentaryID] ), Commentary[Level] = "Group" )
+			VAR levelofcomment = [Level of comment]
 			
-			    VAR GROUPresult =  CALCULATE(SELECTEDVALUE( Commentary[Description] ), Commentary[CommentaryID] = grouprecord)
+			VAR levelofdetail =  [Level seelcted of comment]
 			
-			
-			VAR result = 
-			    SWITCH(
-			        TRUE(),
-			        isfiltered_le, SELECTEDVALUE(legalentity[Legal entity name]),
-			        isfiltered_country, SELECTEDVALUE('legalentity'[Country]),
-			        isfiltered_region, SELECTEDVALUE('legalentity'[Region]),
-			        "Group"
+			    VAR calctableforcurrentle = 
 			        
-			        //CALCULATE(SELECTEDVALUE(commentary[Description]), TREATAS(VALUES('legalentity'[Group]), commentary[Level]))      
-			        
-			            )
+			        CALCULATETABLE(
+			            Commentary,
+			             Commentary[Level] = levelofcomment,
+			            Commentary[LevelDetail] = levelofdetail    
+			            
+			        )
+			    
 			
+			    
 			
-			RETURN GROUPresult
+			    VAR calculatemaxrecord=
+			                
+			        CALCULATE(
+			            MAX( Commentary[CommentaryID] ),
+			
+			            calctableforcurrentle 
+			        )
+			    
+			    
+			    
+			    VAR result =
+			        CALCULATE(
+			            SELECTEDVALUE( Commentary[Description] ),
+			            Commentary[CommentaryID] =  calculatemaxrecord
+			        )
+			    RETURN
+			result
 			```
 		isHidden
 		displayFolder: Show Commentary
@@ -873,10 +884,6 @@ table _Measures_Hidden
 	measure 'Commentary Date' = CONVERT( CALCULATE( MAX( 'effectivedate'[FiscalDate] ) ), STRING )
 		displayFolder: Show Commentary
 		lineageTag: 53b55d61-7b75-47f2-8bf6-d9c77ddaa210
-
-	measure 'Commentary Level' = "Group"
-		displayFolder: Show Commentary
-		lineageTag: 04a27967-24d7-4348-b000-a116fcc5c589
 
 	measure 'Blank Column' = BLANK( ) + BLANK( )
 		isHidden
@@ -938,6 +945,65 @@ table _Measures_Hidden
 			RETURN selectedtimeperiod & " | " & selectedtimehorizon & " | " & selectedfxassumptions
 		isHidden
 		lineageTag: 3cd27f60-5e6f-46b5-8daf-a3508bb02a7f
+
+	measure 'Level of comment' = ```
+			VAR isfiltered_le = ISFILTERED(legalentity[Legal entity name])
+			VAR isfiltered_country = ISFILTERED('legalentity'[Country])
+			 VAR isfiltered_region = ISFILTERED('legalentity'[Region])
+			
+			
+			 VAR result =
+			     
+			     SWITCH(
+			         TRUE(),
+			           isfiltered_le, "LegalEntity",
+			           isfiltered_country, "Country",
+			           isfiltered_region, "Region",
+			           "Group"    
+			           
+			     
+			     
+			 )
+			 
+			 RETURN result
+			```
+		displayFolder: Show Commentary
+		lineageTag: 48c659b2-a6d9-4565-9d81-2685ec1e2481
+
+	measure 'Level seelcted of comment' = ```
+			VAR isfiltered_le = ISFILTERED(legalentity[Legal entity name])
+			VAR isfiltered_country = ISFILTERED('legalentity'[Country])
+			 VAR isfiltered_region = ISFILTERED('legalentity'[Region])
+			
+			
+			 VAR result =
+			     
+			     SWITCH(
+			         TRUE(),
+			           isfiltered_le, SELECTEDVALUE(LegalEntity[Legal entity name]),
+			           isfiltered_country, SELECTEDVALUE(LegalEntity[Country]),
+			           isfiltered_region, SELECTEDVALUE(LegalEntity[Region]),
+			           "Group"            
+			           
+			     
+			     
+			 )
+			 
+			 RETURN result
+			```
+		displayFolder: Show Commentary
+		lineageTag: 81a6cd04-7f63-4b8f-a4ce-a0d5a3142bc1
+
+	measure 'User Principle Name' = USERPRINCIPALNAME()
+		displayFolder: Show Commentary
+		lineageTag: 25dff0ac-20b2-4ad0-bd46-1eaa56225b24
+
+	measure UserName = USERNAME()
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Show Commentary
+		lineageTag: 6ca2b454-672e-4f10-99ed-8cdce72e3caa
+
+		annotation PBI_FormatHint = {"isCustom":true}
 
 	column Column1
 		dataType: string

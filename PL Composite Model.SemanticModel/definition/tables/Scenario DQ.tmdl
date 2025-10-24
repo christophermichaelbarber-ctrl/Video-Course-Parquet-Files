@@ -4,7 +4,7 @@ table 'Scenario DQ'
 	measure Date = CONVERT( CALCULATE( MAX( 'effectivedate'[FiscalDate] ) ), STRING )
 		lineageTag: 429ba477-0544-4dfc-89bb-c1aa370d817f
 
-	measure Scenario = __Fn_PnL_Sum_Subtotal_and_Blanks( CALCULATE( SUM('Scenario DQ'[Creditlessdebit] ) ) )
+	measure Scenario = __Fn_PnL_Sum_Subtotal_and_Blanks_No_Indicator( CALCULATE( SUM('Scenario DQ'[Creditlessdebit] ) ) )
 		formatString: #,###;-#,###;
 		lineageTag: 11847355-ab05-4a8a-bd7a-53edf8d4d900
 

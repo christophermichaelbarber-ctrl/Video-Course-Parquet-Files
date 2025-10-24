@@ -380,3 +380,36 @@ function TimeIntellignece__YearToGo_Table_Function =
 		    result
 	lineageTag: ebe8a039-7f3a-494d-8a94-7d3807d993e1
 
+/// Creates the P&L Lines
+function __Fn_PnL_Sum_Subtotal_and_Blanks_No_Indicator = ```
+		(
+		    amount: EXPR
+		) =>
+		VAR accountinscope = ISFILTERED( Account )
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount 
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount ,
+		        NCLD_filter_context_calculated_table
+		    )
+		VAR step3_addblanks =
+		    SWITCH(
+		        TRUE( ),
+		        accountinscope, BLANK( ),
+		        SELECTEDVALUE( Layout[Calculationtype] ) = "Blank", 0
+		    )
+		VAR step3_add_zero =
+		    COALESCE( step1_lineitem, step2_subtotal, step3_addblanks )
+		RETURN
+		    step3_add_zero
+		```
+	lineageTag: a39b350d-94b5-4336-9aa2-a6066e460ecf
+

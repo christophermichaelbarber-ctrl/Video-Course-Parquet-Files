@@ -50,23 +50,23 @@ table Commentary
 
 		annotation SummarizationSetBy = Automatic
 
-	column Time_Horizon_Key
+	column TimeHorizonKey
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 94361bd0-7199-4cde-8b6b-4fff026739d2
 		summarizeBy: count
-		sourceColumn: Time_Horizon_Key
+		sourceColumn: TimeHorizonKey
 
 		annotation SummarizationSetBy = Automatic
 
-	column Fx_Assumptions_Key
+	column FxAssumptionsKey
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
 		lineageTag: 8fa258fe-c26f-4379-93db-992a6fac0fd8
 		summarizeBy: count
-		sourceColumn: Fx_Assumptions_Key
+		sourceColumn: FxAssumptionsKey
 
 		annotation SummarizationSetBy = Automatic
 
@@ -75,16 +75,16 @@ table Commentary
 		sourceProviderType: nvarchar(400)
 		lineageTag: 5b41d7bc-6f37-492d-9742-866788e43a6b
 		summarizeBy: none
-		sourceColumn: User Name
+		sourceColumn: UserName
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'User Principle Name'
+	column UserPrincipleName
 		dataType: string
 		sourceProviderType: nvarchar(400)
 		lineageTag: adfe3a9f-1cc4-43a1-85cb-7614ea9ca8b9
 		summarizeBy: none
-		sourceColumn: User Principle Name
+		sourceColumn: UserPrincipleName
 
 		annotation SummarizationSetBy = Automatic
 
