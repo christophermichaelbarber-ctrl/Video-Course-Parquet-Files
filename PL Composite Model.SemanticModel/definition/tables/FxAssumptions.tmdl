@@ -1,0 +1,37 @@
+table FxAssumptions
+	lineageTag: a1fa1ccd-97f6-4ece-8ce3-5c9582879b7c
+
+	column FxAssumption
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: dcf17fcd-42cb-418c-952e-cbf739e94ae1
+		summarizeBy: none
+		sourceColumn: FxAssumption
+
+		annotation SummarizationSetBy = Automatic
+
+	column FxAssumptionSortOrder
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 82e76ec2-65a2-4b6c-8958-74b8816b9893
+		summarizeBy: sum
+		sourceColumn: FxAssumptionSortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FxAssumptions = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_FxAssumptions = Source{[Schema="dbo",Item="FxAssumptions"]}[Data]
+				in
+				    dbo_FxAssumptions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Field Paramaters
+

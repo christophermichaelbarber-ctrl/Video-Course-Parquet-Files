@@ -1,0 +1,115 @@
+table Commentary
+	lineageTag: 71216e4e-cb7b-41b2-a7fb-3eea63712d40
+	sourceLineageTag: [dbo].[Commentary]
+
+	column CommentaryID
+		dataType: int64
+		formatString: 0
+		lineageTag: 74183962-e035-4cc1-8ea0-ec9ab1d8ff65
+		sourceLineageTag: CommentaryID
+		summarizeBy: count
+		sourceColumn: CommentaryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: c7ceea7e-f889-4490-ad8a-2188d8d92f5b
+		sourceLineageTag: Description
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: string
+		lineageTag: 32f87ec2-585e-490f-97c7-f169447733c5
+		sourceLineageTag: Level
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column LevelDetail
+		dataType: string
+		lineageTag: 53f3b017-ba64-4a0a-b4c8-e1866d5f8b0c
+		sourceLineageTag: LevelDetail
+		summarizeBy: none
+		sourceColumn: LevelDetail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f948cf32-9fb4-4457-a157-d0a52971c663
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time_Horizon_Key
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e60d123-7d5d-426f-b319-8b2956f9f067
+		sourceLineageTag: Time_Horizon_Key
+		summarizeBy: count
+		sourceColumn: Time_Horizon_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fx_Assumptions_Key
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d821f7d-2f3f-45b8-8ea2-7e72707d0228
+		sourceLineageTag: Fx_Assumptions_Key
+		summarizeBy: count
+		sourceColumn: Fx_Assumptions_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		lineageTag: f46c75ca-f378-4d6d-a28c-a3b0fb808514
+		sourceLineageTag: User Name
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Principle Name'
+		dataType: string
+		lineageTag: f48f942d-3f2f-4f1e-ba30-6fde41d42043
+		sourceLineageTag: User Principle Name
+		summarizeBy: none
+		sourceColumn: User Principle Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column rowguid
+		dataType: string
+		lineageTag: cabf5f38-a832-4944-a79d-50fad5f0a209
+		sourceLineageTag: rowguid
+		summarizeBy: none
+		sourceColumn: rowguid
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ffef6bcf-59e8-49ad-b414-08f195ad1a6e
+		sourceLineageTag: ModifiedDate
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Commentary = entity
+		mode: directLake
+		source
+			entityName: Commentary
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

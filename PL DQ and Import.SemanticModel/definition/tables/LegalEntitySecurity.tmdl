@@ -1,0 +1,78 @@
+table LegalEntitySecurity
+	lineageTag: 3a8a4996-b5bb-4cc6-b921-8e885fbe6ba2
+	sourceLineageTag: [dbo].[LegalEntitySecurity]
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: e5f6b1f7-670e-4e48-b63a-5959e1e086e9
+		sourceLineageTag: Full Name
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: string
+		lineageTag: 932f8da6-dd19-4421-8592-75803716a29d
+		sourceLineageTag: Level
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 69a6fc92-ba3e-41c8-b1e0-a597542e0cd7
+		sourceLineageTag: Employee ID
+		summarizeBy: count
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		lineageTag: 3fa0e7dc-b37b-4046-a198-166f1f1bb950
+		sourceLineageTag: User Name
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: b4861754-cce0-42eb-867d-b368d5aefd57
+		sourceLineageTag: Legal Entity Key
+		summarizeBy: count
+		sourceColumn: Legal Entity Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Security_Key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c76ebef-286d-4fc4-b3ac-7264d8f484a6
+		sourceLineageTag: Security_Key
+		summarizeBy: count
+		sourceColumn: Security_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_1762105318
+		dataType: int64
+		formatString: 0
+		lineageTag: 9be955b5-d9ef-4085-8b85-b27d992f2c98
+		sourceLineageTag: MSSQL_System_Uniquifier_1762105318
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_1762105318
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LegalEntitySecurity = entity
+		mode: directLake
+		source
+			entityName: LegalEntitySecurity
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

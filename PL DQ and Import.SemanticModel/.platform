@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "PL DQ and Import"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a54e141a-ac45-a9a0-46e4-80e836b47af6"
+  }
+}

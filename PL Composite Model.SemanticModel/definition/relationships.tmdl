@@ -1,0 +1,44 @@
+relationship 95d60aff-6bb3-4e3c-a225-3ca8577e6122
+	fromColumn: Account.Income_Statement_Key
+	toColumn: Layout.IncomeStatementKey
+
+relationship 831b0fac-b5c1-4d2d-a9cd-f34f7a27bf39
+	fromColumn: Ledger.'Account Key'
+	toColumn: Account.'Account Key'
+
+relationship 5eeb45fa-07b2-406c-bbb5-b0b0f8b454cf
+	fromColumn: Scenario.AccountKey
+	toColumn: Account.'Account Key'
+
+relationship 61fe7b0d-e1ff-405b-962d-b8009636a638
+	fromColumn: 'Scenario DQ'.AccountKey
+	toColumn: Account.'Account Key'
+
+relationship 38859d3e-4aa1-4c4d-9c9f-f6391aa99fb3
+	fromColumn: 'Scenario DQ'.LegalEntityKey
+	toColumn: LegalEntity.'Legal Entity Key'
+
+relationship 1ce482f9-c658-4b22-9914-0716af3218f4
+	fromColumn: Scenario.LegalEntityKey
+	toColumn: LegalEntity.'Legal Entity Key'
+
+relationship a9cb58ee-8320-4843-ad33-ff827dd157de
+	fromColumn: Ledger.'Legal Entity'
+	toColumn: LegalEntity.'Legal Entity Key'
+
+relationship 8660e0d2-ec16-422b-8f75-4642cb745bca
+	fromColumn: Scenario.EffectiveDate
+	toColumn: EffectiveDate.FiscalDate
+
+relationship 84ba0ada-8ae6-4919-a82e-f5751c460386
+	fromColumn: 'Scenario DQ'.EffectiveDate
+	toColumn: EffectiveDate.FiscalDate
+
+relationship 63cc4cc0-1e38-45e2-b7f5-3e8751d3194b
+	fromColumn: Ledger.Date
+	toColumn: EffectiveDate.FiscalDate
+
+relationship 55af0bb1-21cd-48a8-91d8-371504904cc6
+	fromColumn: '__Field Paramater Self-Service Table Measures'.Selected_Measures_Key
+	toColumn: FxAssumptions.FxAssumptionSortOrder
+

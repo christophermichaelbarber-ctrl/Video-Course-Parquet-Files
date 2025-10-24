@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "PL Composite Model"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "61c6a294-43e2-abce-48f6-bafe90fbffb5"
+  }
+}

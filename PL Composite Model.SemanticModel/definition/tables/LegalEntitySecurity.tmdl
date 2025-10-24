@@ -1,0 +1,75 @@
+table LegalEntitySecurity
+	lineageTag: 8be1cdf3-5d4c-4576-ba51-ada94ea4bee8
+
+	column 'Full Name'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: ebc1bc8c-c039-4e78-bd92-35d72582b53d
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9a14d236-2a3d-475d-a718-a7bd48187642
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee ID'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 7c115024-03ad-4cea-9fb7-c5ed2c64d86d
+		summarizeBy: count
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0e0445af-4547-45f5-b4e9-d2886e5533f8
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity Key'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 3a5c0187-a929-4faf-aa8f-de434d80243e
+		summarizeBy: count
+		sourceColumn: Legal Entity Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Security_Key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: dc2f46ab-2b0c-4233-8fad-68dc7714887c
+		summarizeBy: count
+		sourceColumn: Security_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LegalEntitySecurity = m
+		mode: dual
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_LegalEntitySecurity = Source{[Schema="dbo",Item="LegalEntitySecurity"]}[Data]
+				in
+				    dbo_LegalEntitySecurity
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Dimension
+

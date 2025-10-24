@@ -10,3 +10,10 @@ CREATE TABLE [dbo].[Scenario] (
 
 GO
 
+CREATE NONCLUSTERED INDEX [nci_msft_1_Scenario_DA2409853CCBCDD11F0219D462592557]
+    ON [dbo].[Scenario]([ScenarioKey] ASC, [EffectiveDate] ASC)
+    INCLUDE([AccountKey], [Creditlessdebit], [LegalEntityKey]);
+
+
+GO
+

@@ -1,0 +1,964 @@
+table _Measures_Hidden
+	lineageTag: 4364c3ed-263f-4a37-8c36-14587aab5577
+
+	measure 'Actuals @actual fx' = __Fn_PnL_Step3_CY_AddDivide( SUM('ledger'[CreditlessdebitatGlobalFx] ), 1,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\1_Actuals
+		lineageTag: 40f76f66-29ad-4e5f-a4f8-56b2ce3febff
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Actuals @fcst fx' = __Fn_PnL_Step3_CY_AddDivide( SUM( Ledger[CreditLessDebitatFcstFx] ),  1,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\1_Actuals
+		lineageTag: ff72e272-f409-49ee-bd37-3e7166077f16
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Actuals @plan fx' = __Fn_PnL_Step3_CY_AddDivide( SUM( Ledger[CreditLessDebitatPlanFx] ), 1,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\1_Actuals
+		lineageTag: 1fe4f319-45ad-4960-a0fb-0ba229f4ce22
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Actuals @py fx' = __Fn_PnL_Step3_CY_AddDivide( SUM( Ledger[CreditLessDebitatPYFx] ), 1,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\1_Actuals
+		lineageTag: 7c557946-d731-43a0-8f72-48712116a710
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Actuals @actual fx test' = __Fn_PnL_Step2_CY_TimeHorizon( SUM('ledger'[CreditlessdebitatGlobalFx] ), 1,1  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\1_Actuals
+		lineageTag: 89ed3275-da63-4ffb-a30f-712e4df1d785
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Forecast Bottom Up' =
+			__Fn_PnL_Step3_CY_AddDivide(
+			    CALCULATE(
+			        SUM( Scenario[Creditlessdebit] ),
+			        Scenario[ScenarioKey] = 2
+			    ),
+			    2
+			,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\2_Comparisons
+		lineageTag: b850a87f-a0bb-4f03-9365-5ac4973919d9
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Forecast Top Down' =
+			__Fn_PnL_Step3_CY_AddDivide(
+			    CALCULATE(
+			        SUM( Scenario[Creditlessdebit] ),
+			        Scenario[ScenarioKey] = 1
+			    ),
+			    2
+			,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\2_Comparisons
+		lineageTag: 0dc45bdb-a39b-4607-b4a1-244f29836eb7
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure Plan =
+			__Fn_PnL_Step3_CY_AddDivide(
+			    CALCULATE(
+			        SUM( Scenario[Creditlessdebit] ),
+			        Scenario[ScenarioKey] = 3
+			    ),
+			    2
+			,0  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\2_Comparisons
+		lineageTag: 87e7a89c-1a0d-42eb-b8d8-2d3952191248
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'Prior Year Actuals' = __Fn_PnL_Step3_CY_AddDivide( SUM( Ledger[CreditLessDebitatGlobalFx] ), 1,1  ) //1 = actuals 2 = Scenario ,0 = CY, 1 = PY)
+		displayFolder: 1_BaseMeasures\2_Comparisons
+		lineageTag: 2ac2545e-c79d-41ae-b662-9d3c5557dad2
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringDefault],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'var Overall Actuals @actual fx vs Forecast Bottom Up' = [Actuals @actual fx] - [Forecast Bottom Up]
+		displayFolder: 1_BaseMeasures\3_Varaince\a_overall
+		lineageTag: 4c06ae17-8744-4f10-a398-15df4b47a497
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'var Overall Actuals @actual fx vs Forecast Top Down' = [Actuals @actual fx] - [Forecast Top Down]
+		displayFolder: 1_BaseMeasures\3_Varaince\a_overall
+		lineageTag: b0083dc6-979f-46dd-9d1f-a0aeaed4c432
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'var Overall Actuals @actual fx vs Plan' = [Actuals @actual fx] - [Basic Plan]
+		displayFolder: 1_BaseMeasures\3_Varaince\a_overall
+		lineageTag: cce4e652-6b4c-44ab-bbae-ade98a492d9f
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure 'var Overall Actuals @actual fx vs PY' = [Actuals @actual fx] - [Prior Year Actuals]
+		displayFolder: 1_BaseMeasures\3_Varaince\a_overall
+		lineageTag: 3a3a6546-34d0-48bd-a41c-c20544a345c2
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "#,##0,;(#,##0,);-"
+				)
+
+	measure Green = "#64B669"
+		isHidden
+		displayFolder: Field Paramaters\_Formatting
+		lineageTag: 7f864e8b-9b24-4583-8da2-09eed6610546
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure Gray = "#F3F3F3"
+		isHidden
+		displayFolder: Field Paramaters\_Formatting
+		lineageTag: 6e32a76b-6167-4186-8401-7339d2631428
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure Red = "#EB3B3B"
+		isHidden
+		displayFolder: Field Paramaters\_Formatting
+		lineageTag: f9c516c3-66c7-4b1c-9aec-0a2afec8199e
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure Blue = "#000000"
+		isHidden
+		displayFolder: Field Paramaters\_Formatting
+		lineageTag: 706158d0-6c36-41a7-b0c2-daa4337f2e89
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'Medium Gray' = "#8b8680"
+		isHidden
+		displayFolder: Field Paramaters\_Formatting
+		lineageTag: 5fd2240c-f173-4ca5-aca2-85a427c3189a
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 A Act' = [Actuals @actual fx]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: be2970ef-1cad-4ee0-8f71-5059378f7404
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 B PY' = [Prior Year Actuals]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 8ebba6f4-6683-48f2-a1b3-ce4e46eed2ac
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 C Fcst TD' = [Forecast Top Down]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 5d62a6fb-1f3e-4e11-9595-c6a917c587cd
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 D Fcts BU' = [Forecast Bottom Up]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 4efa276b-00cd-4513-9f87-3688163e89d6
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 E Pln' = [Plan]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: d9e3e1d0-8849-4d06-bfb6-3ccc5df232c3
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 F' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 3e51ac41-d96f-4155-830a-a665417ce814
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 G vs PY' = [View A1 A Act] - [View A1 B PY]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 28f24dd5-35b1-4f86-90db-35127a4981a2
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 H vs Fcst TD' = [View A1 A Act] - [View A1 C Fcst TD]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: b0742bd0-a328-454e-938f-7a785b717b55
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 I vs Fcst BU' = [View A1 A Act] - [View A1 D Fcts BU]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 4a29dfb0-6be5-4c27-8e08-2da8439cc59b
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 J vs Pln' = [View A1 A Act] - [View A1 E Pln]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 061387aa-5a80-46a7-9d9c-0ff7344bc69e
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 K' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 764ed0fa-3de2-4dd7-9f63-ae23ee27b806
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A1 L vs PY, %' = DIVIDE( [View A1 G vs PY], [View A1 A Act] ) * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 84e4b11a-387a-43ac-b030-8ae35e73c74a
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 M vs Fcst TD, %' =
+			DIVIDE( [View A1 H vs Fcst TD], [View A1 A Act] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 1e7f5d08-e42c-482e-a8c6-6e111569e219
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 N vs Fcst BU, %' =
+			DIVIDE( [View A1 I vs Fcst BU], [View A1 A Act] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: f0ef6f68-5a92-40d5-9e5f-b0d9f0818b45
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 O vs Pln, %' = DIVIDE( [View A1 J vs Pln], [View A1 A Act] ) * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall
+		lineageTag: 70698327-f115-4cf8-9d00-882c30b650bf
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 Format Fcst BU' = __Fn_PnL_Variance_Highlights( [View A1 I vs Fcst BU] )
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall\Formatting
+		lineageTag: 7316677c-0a37-40f0-bc4c-1709344df9e9
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 Format Fcst TD' = __Fn_PnL_Variance_Highlights( [View A1 H vs Fcst TD] )
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall\Formatting
+		lineageTag: fb692671-a918-433a-8232-d6549f1d2dbe
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 Format Pln' = __Fn_PnL_Variance_Highlights([View A1 J vs Pln] )
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall\Formatting
+		lineageTag: 6cfd9bf8-59b5-425f-9692-ca228da143ab
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A1 Format PY' = __Fn_PnL_Variance_Highlights( [View A1 G vs PY])
+		isHidden
+		displayFolder: Field Paramaters\View A1: Overall\Formatting
+		lineageTag: b6378439-7642-437a-a6fa-4f48c59afb0e
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 A Act @PY' = [Actuals @py fx]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: ba93a4d6-3390-4cf0-aa90-5f958a783a8a
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 B Act @Fcst' = [Actuals @fcst fx]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: b72fa81d-35cd-4df8-b4a5-815ebbfdad53
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 C Act @Plan' = [Actuals @plan fx]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: dae40818-b94d-441a-9e73-1b41bb15517c
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 D PY' = [Prior Year Actuals]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 0d2b9b5d-f321-4039-94f4-fd264c52a5f2
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 E Fcst TD' = [Forecast Top Down]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: aa0de7b9-8e33-4257-ab08-e2db90058025
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 F Fcts BU' = [Forecast Bottom Up]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 5b6966f6-3aab-402a-8717-8d61c12c84a8
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 G Pln' = [Plan]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: e38a0d9d-228e-4ca3-8b0a-17875d69279f
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 H' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 680d1c67-4529-4905-b1a7-a9dd5b885554
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 I vs PY' = [View A2 A Act @PY] - [View A2 D PY]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: b67aa94c-fc95-48e0-a8e8-393e876ca76e
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 J vs Fcst TD' = [View A2 B Act @Fcst] - [View A2 E Fcst TD]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 6a22b28e-c5d3-4378-aaa3-14a6445fe690
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 K vs Fcst BU' = [View A2 B Act @Fcst] - [View A2 F Fcts BU]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 25625f63-ab2c-4876-8b5b-1f9a9d9f1b78
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 L vs Pln' = [View A2 C Act @Plan] - [View A2 G Pln]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: a1e0bac5-4abf-4c54-801a-94d2cdb1ec35
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 M' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 98ee457e-eb56-41d7-93ed-2f00f3f4582a
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A2 N vs PY, %' =
+			DIVIDE( [View A2 I vs PY], [View A2 A Act @PY] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 874daf7b-fee0-4fea-812e-3b0c293cc471
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 O vs Fcst TD, %' =
+			DIVIDE( [View A2 J vs Fcst TD], [View A2 B Act @Fcst] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 01f9a9d1-f0a7-4977-862d-efd611be7c79
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 P vs Fcst BU, %' =
+			DIVIDE( [View A2 K vs Fcst BU], [View A2 B Act @Fcst] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: d308c64c-c802-4720-9c0b-434f9f65134c
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 Q vs Pln, %' =
+			DIVIDE( [View A2 L vs Pln], [View A2 C Act @Plan] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying
+		lineageTag: 557f04ca-5c30-431d-af8d-7e719151229a
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 Format PY' = __Fn_PnL_Variance_Highlights( [View A2 I vs PY] )
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying\Formatting
+		lineageTag: ed14edc4-815d-4498-993e-40d9fe2be6c6
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 Format Pln' = __Fn_PnL_Variance_Highlights( [View A2 L vs Pln] )
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying\Formatting
+		lineageTag: a2791b3d-2011-4e1b-9343-3cb0e27766a0
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 Format Fcst TD' = __Fn_PnL_Variance_Highlights( [View A2 J vs Fcst TD] )
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying\Formatting
+		lineageTag: b01a0b25-057b-4ab8-9058-710f0b4dd647
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A2 Format Fcst BU' = __Fn_PnL_Variance_Highlights( [View A2 K vs Fcst BU] )
+		isHidden
+		displayFolder: Field Paramaters\View A2: Underlying\Formatting
+		lineageTag: 1e654b2a-572f-41cd-9665-45b33df720f0
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 A Act @Act Fx' = [Actuals @actual fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: d19034b8-e3fb-4cab-b155-3effe78f45dc
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 B Act @PY Fx' = [Actuals @py fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: c680041b-e2c7-4a4e-990e-5c19f6daeca2
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 C Act @Fcst Fx' = [Actuals @fcst fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 8fcfd4be-7942-4808-9467-b88b12d13c5a
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 D Act @Plan Fx' = [Actuals @plan fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 4ffa3858-dccd-44dc-9c98-bb4ab37130e9
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 E' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 5834fc7c-e798-4a38-a502-cf4347a59079
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 F vs PY' = [View A3 A Act @Act Fx] - [View A3 B Act @PY Fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 810816b0-c617-4096-8de9-a65296d0ce12
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 G vs Fcst' = [View A3 A Act @Act Fx] - [View A3 C Act @Fcst Fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 0aae2909-a779-469a-bc22-52afe92623b1
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 H vs Pln' = [View A3 A Act @Act Fx] - [View A3 D Act @Plan Fx]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: dd24091b-c4ca-4df6-887f-e7370631adef
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVarianceAbs],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 I' = [Blank Column]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: f6dbbfc9-7aeb-4db7-96d5-c027e44d8e41
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'View A3 J vs PY, %' =
+			DIVIDE( [View A3 F vs PY], [View A3 A Act @Act Fx] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: 4698c33e-48e0-4845-91c7-72828674b0d2
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 K vs Fcst, %' =
+			DIVIDE( [View A3 G vs Fcst], [View A3 A Act @Act Fx] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: b8c0c2ce-73a2-47db-bea8-5b78b2e90b81
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 L vs Pln, %' =
+			DIVIDE( [View A3 H vs Pln], [View A3 A Act @Act Fx] )
+			    * [Show Perc]
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx
+		lineageTag: ba5b2412-6b49-46c4-85d5-9f4a15c761b4
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 Format PY' = __Fn_PnL_Variance_Highlights( [View A3 F vs PY] )
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx\Formatting
+		lineageTag: fb5de7c3-8276-4681-a8e8-5c7f5d4e2cc2
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 Format Fcst' = __Fn_PnL_Variance_Highlights( [View A3 G vs Fcst] )
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx\Formatting
+		lineageTag: 91cb07f5-8189-4038-99c0-b97b403d4a47
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'View A3 Format Pln' = __Fn_PnL_Variance_Highlights( [View A3 H vs Pln] )
+		isHidden
+		displayFolder: Field Paramaters\View A3: Fx\Formatting
+		lineageTag: 06ee4ab8-14cb-426a-bea5-66d1d919347a
+
+		formatStringDefinition =
+				SELECTEDVALUE(
+				    Layout[FormatStringVariancePer],
+				    "0;0-0;;@"
+				)
+
+		changedProperty = IsHidden
+
+	measure 'Show Commentary' = ```
+			VAR isfiltered_region = ISFILTERED('legalentity'[Region])
+			VAR isfiltered_country = ISFILTERED('legalentity'[Country])
+			VAR isfiltered_le = ISFILTERED(legalentity[Legal entity name])
+			VAR grouprecord = CALCULATE( MAX( Commentary[CommentaryID] ), Commentary[Level] = "Group" )
+			
+			    VAR GROUPresult =  CALCULATE(SELECTEDVALUE( Commentary[Description] ), Commentary[CommentaryID] = grouprecord)
+			
+			
+			VAR result = 
+			    SWITCH(
+			        TRUE(),
+			        isfiltered_le, SELECTEDVALUE(legalentity[Legal entity name]),
+			        isfiltered_country, SELECTEDVALUE('legalentity'[Country]),
+			        isfiltered_region, SELECTEDVALUE('legalentity'[Region]),
+			        "Group"
+			        
+			        //CALCULATE(SELECTEDVALUE(commentary[Description]), TREATAS(VALUES('legalentity'[Group]), commentary[Level]))      
+			        
+			            )
+			
+			
+			RETURN GROUPresult
+			```
+		isHidden
+		displayFolder: Show Commentary
+		lineageTag: 9f53fc99-ca18-4bbe-8cb5-c6547c839e2f
+
+	measure 'Commentary Date' = CONVERT( CALCULATE( MAX( 'effectivedate'[FiscalDate] ) ), STRING )
+		displayFolder: Show Commentary
+		lineageTag: 53b55d61-7b75-47f2-8bf6-d9c77ddaa210
+
+	measure 'Commentary Level' = "Group"
+		displayFolder: Show Commentary
+		lineageTag: 04a27967-24d7-4348-b000-a116fcc5c589
+
+	measure 'Blank Column' = BLANK( ) + BLANK( )
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: addbf022-0ca3-466d-82f4-d2b5a62e09f0
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+	measure 'Show Perc' =
+			VAR showperc = MAX( Layout[ShowPerc] )
+			VAR isnotfilteredledger = ISFILTERED( Ledger )
+			VAR result = showperc
+			RETURN
+			    showperc
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: 36ce9588-0dc1-4139-8f85-7da37aed8dc3
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+	measure 'Line Name Background' = ```
+			CALCULATE(
+			    SELECTEDVALUE(
+			        Layout[FormattingHexBackground]
+			        
+			    )
+			)
+			```
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: b92429b2-47d2-4b2d-9abc-2750bd3b5431
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure 'Line Name Font' = ```
+			CALCULATE(
+			    SELECTEDVALUE(
+			        Layout[FormattingHexText]
+			        
+			    )
+			)
+			```
+		isHidden
+		displayFolder: Show Values and Blanks
+		lineageTag: 55f7f403-f9c3-4528-bec1-3fead42f525a
+
+		formatStringDefinition = SELECTEDVALUE( Layout[FormatStringDefault], "0;0-0;;@" )
+
+		changedProperty = IsHidden
+
+	measure SelectionsTitle =
+			var selectedtimeperiod = SELECTEDVALUE( 'effectivedate'[Fiscal Period CP] )
+			VAR selectedtimehorizon = SELECTEDVALUE( 'SelectedTimeFrame'[Time Horizon] )
+			VAR selectedfxassumptions = SELECTEDVALUE('FxAssumptions'[FxAssumption] )
+			
+			
+			RETURN selectedtimeperiod & " | " & selectedtimehorizon & " | " & selectedfxassumptions
+		isHidden
+		lineageTag: 3cd27f60-5e6f-46b5-8daf-a3508bb02a7f
+
+	column Column1
+		dataType: string
+		lineageTag: 699bc124-3a6d-485b-adaf-58a74b24b448
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures_Hidden = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Disconnected
+

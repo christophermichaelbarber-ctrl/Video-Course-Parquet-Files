@@ -1,0 +1,201 @@
+table LegalEntity
+	lineageTag: 90a8dcd0-b59b-4761-a131-2b6b779df516
+	sourceLineageTag: [dbo].[LegalEntity]
+
+	column 'Legal Entity Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fe3b327-aa0b-4a9e-b81e-4067edf6343d
+		sourceLineageTag: Legal Entity Key
+		summarizeBy: count
+		sourceColumn: Legal Entity Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity name'
+		dataType: string
+		lineageTag: 3ac75225-9ba6-4a03-bd96-3fcff32ed9ec
+		sourceLineageTag: Legal entity name
+		summarizeBy: none
+		sourceColumn: Legal entity name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity Sort Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: bb9fd521-d1fb-48a2-9b29-5a0fb69723d3
+		sourceLineageTag: Legal Entity Sort Order
+		summarizeBy: sum
+		sourceColumn: Legal Entity Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 2455073b-5c3f-4855-b471-8cba9d39cceb
+		sourceLineageTag: Group
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: e25a6a12-e142-4c00-a1fe-387232daf6e4
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 21e52f86-c342-46fc-b5a7-f919192138aa
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 5 name'
+		dataType: string
+		lineageTag: d1e25952-ddb1-49a4-8c15-09f92892b1d8
+		sourceLineageTag: Legal entity level 5 name
+		summarizeBy: none
+		sourceColumn: Legal entity level 5 name
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_1986106116
+		dataType: int64
+		formatString: 0
+		lineageTag: 944a2f0e-d9fa-47d0-bd1f-496fcda5749b
+		sourceLineageTag: MSSQL_System_Uniquifier_1986106116
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_1986106116
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 4'
+		dataType: int64
+		formatString: 0
+		lineageTag: 50a80e3e-440c-471d-9244-ff0574d98680
+		sourceLineageTag: Legal entity level 4
+		summarizeBy: sum
+		sourceColumn: Legal entity level 4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 5'
+		dataType: int64
+		formatString: 0
+		lineageTag: a2b61199-6002-4a23-8797-09a3f0b1a585
+		sourceLineageTag: Legal entity level 5
+		summarizeBy: sum
+		sourceColumn: Legal entity level 5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 1 name'
+		dataType: string
+		lineageTag: 3bacdc32-7758-41ba-b0c3-3a93bd8fffda
+		sourceLineageTag: Legal entity level 1 name
+		summarizeBy: none
+		sourceColumn: Legal entity level 1 name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 2 name'
+		dataType: string
+		lineageTag: 8110fe58-fa54-47b1-a50b-a20d43096a4c
+		sourceLineageTag: Legal entity level 2 name
+		summarizeBy: none
+		sourceColumn: Legal entity level 2 name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 3 name'
+		dataType: string
+		lineageTag: d8d1bea0-e045-4b87-9d53-367d8582920f
+		sourceLineageTag: Legal entity level 3 name
+		summarizeBy: none
+		sourceColumn: Legal entity level 3 name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 4 name'
+		dataType: string
+		lineageTag: 28c41e2d-ce6f-4b4c-a6f2-b2f5fa6eb7c7
+		sourceLineageTag: Legal entity level 4 name
+		summarizeBy: none
+		sourceColumn: Legal entity level 4 name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Child
+		dataType: int64
+		formatString: 0
+		lineageTag: a46a874e-3894-4fa2-a9a4-db2ba8cdc97f
+		sourceLineageTag: Child
+		summarizeBy: sum
+		sourceColumn: Child
+
+		annotation SummarizationSetBy = Automatic
+
+	column Parent
+		dataType: int64
+		formatString: 0
+		lineageTag: 526bfdc0-6939-4a46-8870-f242284d6a22
+		sourceLineageTag: Parent
+		summarizeBy: sum
+		sourceColumn: Parent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Path
+		dataType: string
+		lineageTag: 54cef03c-fdd6-448d-8696-b04fdd041d77
+		sourceLineageTag: Path
+		summarizeBy: none
+		sourceColumn: Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 1'
+		dataType: int64
+		formatString: 0
+		lineageTag: 021cb7fb-7863-4315-8454-24a4db2bd750
+		sourceLineageTag: Legal entity level 1
+		summarizeBy: sum
+		sourceColumn: Legal entity level 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 2'
+		dataType: int64
+		formatString: 0
+		lineageTag: 823476ea-9cbb-474a-8145-12ea68ca532c
+		sourceLineageTag: Legal entity level 2
+		summarizeBy: sum
+		sourceColumn: Legal entity level 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal entity level 3'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a520ddc-1c81-4fbf-a3de-d75ad9f71732
+		sourceLineageTag: Legal entity level 3
+		summarizeBy: sum
+		sourceColumn: Legal entity level 3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LegalEntity = entity
+		mode: directLake
+		source
+			entityName: LegalEntity
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

@@ -1,0 +1,176 @@
+table EffectiveDate
+	lineageTag: cb895d0d-e0b8-44f7-8f88-04a5a49d9132
+	sourceLineageTag: [dbo].[EffectiveDate]
+
+	column 'Fiscal Period Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fdb70cc-a268-4637-b69b-72a5b7c59b06
+		sourceLineageTag: Fiscal Period Number
+		summarizeBy: sum
+		sourceColumn: Fiscal Period Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_94623380
+		dataType: int64
+		formatString: 0
+		lineageTag: 816feb61-2b95-409e-b3ee-9757fe6e92d5
+		sourceLineageTag: MSSQL_System_Uniquifier_94623380
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_94623380
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year-Quarter Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ff344f4-5cff-478f-9686-d3987f54a57e
+		sourceLineageTag: Fiscal Year-Quarter Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Year-Quarter Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year-Period Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 955d2331-1e61-4cbd-a123-ebf090246316
+		sourceLineageTag: Fiscal Year-Period Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Year-Period Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period CP'
+		dataType: string
+		lineageTag: 85ad357f-2856-4a3b-a6b9-3985d68266cb
+		sourceLineageTag: Fiscal Period CP
+		summarizeBy: none
+		sourceColumn: Fiscal Period CP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period CP Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dd75b8a-f5c0-4b35-8cb1-2f001cb26611
+		sourceLineageTag: Fiscal Period CP Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Period CP Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Future Date'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c0efc152-cefc-4505-906a-3c9ff1fad10f
+		sourceLineageTag: Future Date
+		summarizeBy: none
+		sourceColumn: Future Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year Period Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: a7a27bf7-c499-4da5-b5c3-c71955b769ef
+		sourceLineageTag: Fiscal Year Period Number
+		summarizeBy: sum
+		sourceColumn: Fiscal Year Period Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period'
+		dataType: string
+		lineageTag: 6e787a9b-9737-4717-b055-c332a1af0215
+		sourceLineageTag: Fiscal Period
+		summarizeBy: none
+		sourceColumn: Fiscal Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year-Quarter'
+		dataType: string
+		lineageTag: cc573f87-e7f9-46c3-867b-a2c03170cb13
+		sourceLineageTag: Fiscal Year-Quarter
+		summarizeBy: none
+		sourceColumn: Fiscal Year-Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year-Period'
+		dataType: string
+		lineageTag: 86a5d24c-ced2-40e1-98b9-1db7d531a8b1
+		sourceLineageTag: Fiscal Year-Period
+		summarizeBy: none
+		sourceColumn: Fiscal Year-Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: c7e9c7dd-ef13-4b80-bbb0-a142272dd0ad
+		sourceLineageTag: Fiscal Year Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Year Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 306c4a57-bfd1-4e87-add0-e98ccdc4588b
+		sourceLineageTag: Fiscal Quarter Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Quarter Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ffc1903-1fe8-478b-8144-693254ce3d86
+		sourceLineageTag: Fiscal Period Sort
+		summarizeBy: sum
+		sourceColumn: Fiscal Period Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36dc6efa-7816-47fe-b790-e5c346b8da71
+		sourceLineageTag: FiscalDate
+		summarizeBy: none
+		sourceColumn: FiscalDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 93bfd85e-e6cc-429f-88c8-9bc5db3dd2ea
+		sourceLineageTag: Fiscal Year
+		summarizeBy: sum
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter'
+		dataType: string
+		lineageTag: 76bda59a-6f5e-4300-bafe-de90f5073517
+		sourceLineageTag: Fiscal Quarter
+		summarizeBy: none
+		sourceColumn: Fiscal Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition EffectiveDate = entity
+		mode: directLake
+		source
+			entityName: EffectiveDate
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

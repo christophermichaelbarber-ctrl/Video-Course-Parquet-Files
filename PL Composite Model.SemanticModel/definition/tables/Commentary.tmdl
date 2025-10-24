@@ -1,0 +1,126 @@
+table Commentary
+	lineageTag: 3b5ab708-3cd3-4380-84d7-cab03bc6859a
+
+	column CommentaryID
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 38aaae58-7a6d-4d09-afb1-9211b81e58d5
+		summarizeBy: count
+		sourceColumn: CommentaryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(400)
+		lineageTag: 7a825dba-1433-4aaa-9622-7067642dde46
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: 54916c4b-9ea9-468a-a7c9-77e97bcafe2f
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column LevelDetail
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: e374fbcd-c5e3-4ad5-ac16-b84b8de9f4cd
+		summarizeBy: none
+		sourceColumn: LevelDetail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 33402f1b-606f-40d6-9dfd-05d19c416558
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time_Horizon_Key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 94361bd0-7199-4cde-8b6b-4fff026739d2
+		summarizeBy: count
+		sourceColumn: Time_Horizon_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fx_Assumptions_Key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8fa258fe-c26f-4379-93db-992a6fac0fd8
+		summarizeBy: count
+		sourceColumn: Fx_Assumptions_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: 5b41d7bc-6f37-492d-9742-866788e43a6b
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Principle Name'
+		dataType: string
+		sourceProviderType: nvarchar(400)
+		lineageTag: adfe3a9f-1cc4-43a1-85cb-7614ea9ca8b9
+		summarizeBy: none
+		sourceColumn: User Principle Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column rowguid
+		dataType: string
+		isNullable: false
+		sourceProviderType: uniqueidentifier
+		lineageTag: a0df493c-6c5f-4a62-bed5-5627fb9dfcf7
+		summarizeBy: none
+		sourceColumn: rowguid
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedDate
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 13733df3-0fa0-41e1-a544-330c951a2b04
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Commentary = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Commentary = Source{[Schema="dbo",Item="Commentary"]}[Data]
+				in
+				    dbo_Commentary
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Fact
+

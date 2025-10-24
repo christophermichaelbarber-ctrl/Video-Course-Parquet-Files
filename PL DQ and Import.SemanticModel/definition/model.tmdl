@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - Profit and Loss"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["RemoteModeling","DirectLakeOnOneLakeCreatedInDesktop"]
+
+ref table Commentary
+ref table Account
+ref table EffectiveDate
+ref table Scenario
+ref table SelectedTimeFrame
+ref table LegalEntitySecurity
+ref table Ledger
+ref table LegalEntity
+ref table Layout
+ref table FxAssumptions
+

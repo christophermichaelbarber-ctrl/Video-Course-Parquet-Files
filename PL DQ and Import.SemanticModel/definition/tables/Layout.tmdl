@@ -1,0 +1,154 @@
+table Layout
+	lineageTag: 9287c4ca-b5b7-4dec-a5b7-ae5488c29659
+	sourceLineageTag: [dbo].[Layout]
+
+	column IncomeStatementKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bb6cae63-c06b-43ac-97c7-4b611c053ba3
+		sourceLineageTag: IncomeStatementKey
+		summarizeBy: count
+		sourceColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineName
+		dataType: string
+		lineageTag: f13fe814-7a3f-4ae6-b59d-e1a8103847b4
+		sourceLineageTag: LineName
+		summarizeBy: none
+		sourceColumn: LineName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalFrom
+		dataType: int64
+		formatString: 0
+		lineageTag: 85aa22de-a8fb-42a0-a35d-99a9db46e570
+		sourceLineageTag: SubtotalFrom
+		summarizeBy: sum
+		sourceColumn: SubtotalFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalTo
+		dataType: int64
+		formatString: 0
+		lineageTag: 57467611-8b68-40d0-9027-701e6d8fd3d7
+		sourceLineageTag: SubtotalTo
+		summarizeBy: sum
+		sourceColumn: SubtotalTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideNumerator
+		dataType: int64
+		formatString: 0
+		lineageTag: c39ae31d-18d2-425c-8cc9-a88bdf23a051
+		sourceLineageTag: DivideNumerator
+		summarizeBy: sum
+		sourceColumn: DivideNumerator
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideDenominator
+		dataType: int64
+		formatString: 0
+		lineageTag: bce54202-6f66-493f-97f2-dfe6a8f9ca8b
+		sourceLineageTag: DivideDenominator
+		summarizeBy: sum
+		sourceColumn: DivideDenominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowValues
+		dataType: int64
+		formatString: 0
+		lineageTag: 342fc205-37fa-46a6-9a86-8380b2b9c345
+		sourceLineageTag: ShowValues
+		summarizeBy: sum
+		sourceColumn: ShowValues
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalculationType
+		dataType: string
+		lineageTag: 8756dc7e-5c79-4ecd-9434-09d4210145c6
+		sourceLineageTag: CalculationType
+		summarizeBy: none
+		sourceColumn: CalculationType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPerc
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c5938c7-0590-4211-86f8-b292791040ea
+		sourceLineageTag: ShowPerc
+		summarizeBy: sum
+		sourceColumn: ShowPerc
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringDefault
+		dataType: string
+		lineageTag: bad3029f-44c6-48e9-9f45-d6199e0f0e86
+		sourceLineageTag: FormatStringDefault
+		summarizeBy: none
+		sourceColumn: FormatStringDefault
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVarianceAbs
+		dataType: string
+		lineageTag: e3ae43d9-b85c-47e9-97bc-e9abf46cf08d
+		sourceLineageTag: FormatStringVarianceAbs
+		summarizeBy: none
+		sourceColumn: FormatStringVarianceAbs
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVariancePer
+		dataType: string
+		lineageTag: 6e7f2c1f-3099-4b89-afd1-4df9b29715b0
+		sourceLineageTag: FormatStringVariancePer
+		summarizeBy: none
+		sourceColumn: FormatStringVariancePer
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexText
+		dataType: string
+		lineageTag: 3d78a354-5bc6-4032-bbde-6f903de37c4b
+		sourceLineageTag: FormattingHexText
+		summarizeBy: none
+		sourceColumn: FormattingHexText
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexBackground
+		dataType: string
+		lineageTag: a28d40be-32bc-4b61-89be-085fa16241c3
+		sourceLineageTag: FormattingHexBackground
+		summarizeBy: none
+		sourceColumn: FormattingHexBackground
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_2098106515
+		dataType: int64
+		formatString: 0
+		lineageTag: b9ee419c-c3c7-44f6-9caa-ecc3d7b9b9e2
+		sourceLineageTag: MSSQL_System_Uniquifier_2098106515
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_2098106515
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Layout = entity
+		mode: directLake
+		source
+			entityName: Layout
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

@@ -1,0 +1,80 @@
+table Scenario
+	lineageTag: 4ca0a8a2-8208-4983-9cc4-b98f7bb936fe
+
+	column EffectiveDate
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 39d0d628-c017-4073-b882-deb9932da293
+		summarizeBy: none
+		sourceColumn: EffectiveDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column AccountKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d97fbd11-ef45-4217-b6f9-728fa4fdbc8f
+		summarizeBy: count
+		sourceColumn: AccountKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 979fce44-2a33-4b10-a4bc-604cb795c53e
+		summarizeBy: count
+		sourceColumn: ScenarioKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LegalEntityKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 31377a33-4ec1-4945-9f08-f94bea5434d6
+		summarizeBy: count
+		sourceColumn: LegalEntityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Creditlessdebit
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 46ea0284-706f-4226-88ee-dd2df3f07eac
+		summarizeBy: sum
+		sourceColumn: Creditlessdebit
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioPK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ca0aa723-50a3-479a-a7c9-0d296774f3d0
+		summarizeBy: sum
+		sourceColumn: ScenarioPK
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Scenario = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Scenario = Source{[Schema="dbo",Item="Scenario"]}[Data]
+				in
+				    dbo_Scenario
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Fact
+

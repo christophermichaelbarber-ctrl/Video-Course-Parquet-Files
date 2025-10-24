@@ -1,0 +1,40 @@
+table FxAssumptions
+	lineageTag: d8d221c2-638f-4ad8-9cde-5b1b9e991c73
+	sourceLineageTag: [dbo].[FxAssumptions]
+
+	column FxAssumption
+		dataType: string
+		lineageTag: 81ad8617-f63e-4220-85f6-1f2891d1d4d1
+		sourceLineageTag: FxAssumption
+		summarizeBy: none
+		sourceColumn: FxAssumption
+
+		annotation SummarizationSetBy = Automatic
+
+	column FxAssumptionSortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c59ca81-0eca-421d-ad9a-3ad457fe07fd
+		sourceLineageTag: FxAssumptionSortOrder
+		summarizeBy: sum
+		sourceColumn: FxAssumptionSortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_530100929
+		dataType: int64
+		formatString: 0
+		lineageTag: 63a442f4-ad7e-41f4-b67c-e9867866d2b0
+		sourceLineageTag: MSSQL_System_Uniquifier_530100929
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_530100929
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FxAssumptions = entity
+		mode: directLake
+		source
+			entityName: FxAssumptions
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

@@ -1,0 +1,40 @@
+table SelectedTimeFrame
+	lineageTag: 126ac704-3499-42b5-b115-89519eaa6e46
+	sourceLineageTag: [dbo].[SelectedTimeFrame]
+
+	column 'Time Horizon'
+		dataType: string
+		lineageTag: 0a2e1ef6-1888-4039-a6ad-532e09f2880d
+		sourceLineageTag: Time Horizon
+		summarizeBy: none
+		sourceColumn: Time Horizon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Horizon Sort Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dca388f-f1e3-4a98-8da0-b1fb8c7f3f6f
+		sourceLineageTag: Time Horizon Sort Order
+		summarizeBy: sum
+		sourceColumn: Time Horizon Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_1266103551
+		dataType: int64
+		formatString: 0
+		lineageTag: c98ce0d1-5f0e-41ca-82cb-712eef6d668c
+		sourceLineageTag: MSSQL_System_Uniquifier_1266103551
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_1266103551
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SelectedTimeFrame = entity
+		mode: directLake
+		source
+			entityName: SelectedTimeFrame
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+

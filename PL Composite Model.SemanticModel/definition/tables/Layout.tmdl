@@ -1,0 +1,152 @@
+table Layout
+	lineageTag: 15f132fe-8d34-46fa-9b74-0c79ff10a7e7
+
+	column IncomeStatementKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: d7181d8b-ef77-4a1b-a33b-2f466df28e93
+		summarizeBy: count
+		sourceColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Line Name'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3a2243ae-ee95-48bd-b823-7015240c9473
+		summarizeBy: none
+		sourceColumn: LineName
+		sortByColumn: IncomeStatementKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalFrom
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 295095f7-8947-49ee-998e-fd5192235b90
+		summarizeBy: sum
+		sourceColumn: SubtotalFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubtotalTo
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: b0ec9608-acc7-4381-b8eb-6ba791ad1a88
+		summarizeBy: sum
+		sourceColumn: SubtotalTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideNumerator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f176a738-4cdd-485e-95ec-d5d893e03896
+		summarizeBy: sum
+		sourceColumn: DivideNumerator
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivideDenominator
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2c5cc9bb-d3b1-4fcb-b713-069f7fc9a896
+		summarizeBy: sum
+		sourceColumn: DivideDenominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPerc
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: b2dc9404-d56a-4e4f-8637-9c3a2941a0c4
+		summarizeBy: sum
+		sourceColumn: ShowPerc
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringDefault
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1f4944eb-6e1a-42fb-a5c2-a0fbde7fab22
+		summarizeBy: none
+		sourceColumn: FormatStringDefault
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVarianceAbs
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 59bd421a-c5d5-4bbc-a4c3-2c005829ccf8
+		summarizeBy: none
+		sourceColumn: FormatStringVarianceAbs
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormatStringVariancePer
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a4f4a062-ab3c-421a-b5c4-14011493919b
+		summarizeBy: none
+		sourceColumn: FormatStringVariancePer
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexText
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3eb1a3b8-c3e1-4290-9db3-449ed69cc8c1
+		summarizeBy: none
+		sourceColumn: FormattingHexText
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormattingHexBackground
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3a8d90e9-7cf8-4343-b997-7f2499a451ef
+		summarizeBy: none
+		sourceColumn: FormattingHexBackground
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowValues
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 22aa8c91-b575-43da-acca-481de8c3bc5f
+		summarizeBy: sum
+		sourceColumn: ShowValues
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalculationType
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5af43ce1-9834-4ab0-b223-a7b61fa3b759
+		summarizeBy: none
+		sourceColumn: CalculationType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Layout = m
+		mode: dual
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Layout = Source{[Schema="dbo",Item="Layout"]}[Data]
+				in
+				    dbo_Layout
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Dimension
+

@@ -1,0 +1,382 @@
+/// Creates the P&L Lines
+function __Fn_PnL_HideVariances =
+		(
+		    amount: EXPR,
+		    scenario: EXPR
+		) =>
+		IF(
+		    ISFILTERED( Ledger ),
+		    BLANK( ),
+		    amount - scenario
+		)
+	lineageTag: 04fc55ea-e83d-41d9-a508-aff09a11a950
+
+/// Creates the P&L Lines
+function __Fn_PnL_ShowScenario =
+		(
+		    amount: EXPR
+		) =>
+		IF( ISFILTERED( Ledger ), BLANK( ), __Fn_PnL_Sum_Subtotal_and_Blanks( amount ) )
+	lineageTag: ddc9c608-3632-433f-b94f-4e5b47fc9660
+
+/// AddTax takes in amount and returns amount including tax
+function __Fn_PnL_Step1_Sum_and_Subtotal =
+		(
+		    amount: EXPR
+		) =>
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount * MAX( 'Account'[Account Type Indicator])
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount * MAX('Account'[Account Type Indicator] ),
+		        NCLD_filter_context_calculated_table
+		    )
+		
+		VAR result =  COALESCE( step1_lineitem, step2_subtotal )
+		RETURN
+		    result
+	lineageTag: 8cdc2217-9f2a-469f-a0e5-5ef8cb34821b
+
+function __Fn_PnL_Step2_CY_TimeHorizon =
+		(
+		    amount: EXPR,
+		    amounttype: INT64,
+			prioryearoffset: INT64
+		) =>
+		VAR yearoffset = prioryearoffset
+		
+		
+		VAR MonthtoDate_var =  CALCULATE( __Fn_PnL_Step1_Sum_and_Subtotal( amount ), TimeIntellignece__MonthToDate_Table_Function( 'EffectiveDate', yearoffset ) )
+		VAR YeartoDate_var =
+		    CALCULATE( __Fn_PnL_Step1_Sum_and_Subtotal( amount ), TimeIntellignece__YearToDate_Table_Function( 'EffectiveDate', yearoffset ) )
+		VAR QuartertoDate_var =
+		    CALCULATE( __Fn_PnL_Step1_Sum_and_Subtotal( amount ), TimeIntellignece__QuarterToDate_Table_Function( 'EffectiveDate', yearoffset ) )
+		VAR FullQuarter_var =
+		    CALCULATE(
+		        __Fn_PnL_Step1_Sum_and_Subtotal(
+		            CALCULATE(
+		                SUM( Scenario[Creditlessdebit] ),
+		                Scenario[ScenarioKey] = 1
+		            )
+		        ),
+		        TimeIntellignece__QuarterToGo_Table_Function( 'EffectiveDate', yearoffset )
+		    )
+		        + QuartertoDate_var
+		VAR FullYear_var =
+		    CALCULATE(
+		        CALCULATE(
+		            SUM( Scenario[Creditlessdebit] ),
+		            Scenario[ScenarioKey] = 1
+		        ),
+		        TimeIntellignece__YearToGo_Table_Function( 'EffectiveDate', yearoffset )
+		    )
+		        + YeartoDate_var
+		VAR selectedtimehorizon =
+		    SELECTEDVALUE( SelectedTimeFrame[Time Horizon Sort Order] )
+		
+		VAR result =
+		    SWITCH(
+		        TRUE( ),
+		
+		        selectedtimehorizon = 1, MonthtoDate_var,
+		        selectedtimehorizon = 2, QuartertoDate_var,
+		        selectedtimehorizon = 3,  FullQuarter_var,
+		        selectedtimehorizon = 4, YeartoDate_var,
+		        selectedtimehorizon = 5 , FullYear_var
+		    )
+		RETURN
+		    result
+		    //prioryearoffset
+	lineageTag: c72e24e4-740f-4093-b28f-926b30b221ec
+
+function __Fn_PnL_Step3_CY_AddDivide = ```
+		(
+		    amount: EXPR,
+		    amounttype: INT64,
+			prioryearoffset: INT64
+		) =>
+		VAR yearoffset = prioryearoffset
+		VAR calculationfincialstatementstablednumerator =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey]
+		            = MAX( Layout[DivideNumerator] )
+		    )
+		VAR numerator =
+		    CALCULATE(
+		        __Fn_PnL_Step2_CY_TimeHorizon( amount, amounttype, 	prioryearoffset),
+		        calculationfincialstatementstablednumerator
+		    )
+		VAR calculationfincialstatementstabledenominator =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey]
+		            = MAX( 'layout'[DivideDenominator] )
+		    )
+		VAR denominator =
+		    CALCULATE(
+		        __Fn_PnL_Step2_CY_TimeHorizon( amount, amounttype, 	prioryearoffset ),
+		        calculationfincialstatementstabledenominator
+		        ,REMOVEFILTERS( Account )
+		    )
+		
+		//Check if account table is filtered
+		VAR accountinscope = ISFILTERED( Account )
+		//Check if selected calculation type equals blank
+		VAR selectedcalculationtype =
+		    SELECTEDVALUE( Layout[Calculationtype] ) = "Blank"
+		
+		//If account table is filtered, don't show blanks else return 0 if the calculation type if blank
+		
+		VAR blankrows =
+		    SWITCH(
+		        TRUE( ),
+		        accountinscope, BLANK( ),
+		        selectedcalculationtype, 0
+		    )
+			
+		    	
+			
+		VAR result =
+		    COALESCE(
+		        DIVIDE( numerator, denominator ),
+		        __Fn_PnL_Step2_CY_TimeHorizon( amount, amounttype, 	prioryearoffset ),
+		        blankrows
+		    )
+		RETURN
+		  result
+		```
+	lineageTag: c3941c03-2866-40f3-9a3f-d2cca8ec0186
+
+/// Creates the P&L Lines
+function __Fn_PnL_Sum_Subtotal_and_Blanks =
+		(
+		    amount: EXPR
+		) =>
+		VAR accountinscope = ISFILTERED( Account )
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		VAR step1_lineitem =
+		    amount * MAX( 'Account'[Account Type Indicator] )
+		VAR step2_subtotal =
+		    CALCULATE(
+		        amount * MAX(  'Account'[Account Type Indicator] ),
+		        NCLD_filter_context_calculated_table
+		    )
+		VAR step3_addblanks =
+		    SWITCH(
+		        TRUE( ),
+		        accountinscope, BLANK( ),
+		        SELECTEDVALUE( Layout[Calculationtype] ) = "Blank", 0
+		    )
+		VAR step3_add_zero =
+		    COALESCE( step1_lineitem, step2_subtotal, step3_addblanks )
+		RETURN
+		    step3_add_zero
+	lineageTag: d4a4f952-16a1-4956-8dd7-2120ec1d3efb
+
+/// Creates the P&L Lines
+function __Fn_PnL_Variance_Highlights = ```
+		(
+		    amount: EXPR
+		) =>
+		VAR green = "#238823"
+		VAR red = "#D2222D"
+		VAR NCLD_filter_context_calculated_table =
+		    CALCULATETABLE(
+		        Layout,
+		        REMOVEFILTERS( Layout ),
+		        Layout[IncomeStatementKey] >= MIN( Layout[SubtotalFrom] ),
+		        Layout[IncomeStatementKey] <= MIN( Layout[SubtotalTo] )
+		    )
+		    
+		VAR step1_lineitem = MAX( 'Account'[Account Type Indicator])
+		
+		VAR step2_subtotal =
+		    CALCULATE(
+		        MAX( 'Account'[Account Type Indicator]),
+		        NCLD_filter_context_calculated_table
+		    )
+		    
+		VAR indicator = COALESCE( step1_lineitem, step2_subtotal  )
+		   
+		
+		VAR result = IF( amount * indicator < 0, red, green )
+		    
+		RETURN
+		    result
+		```
+	lineageTag: bdc5123e-8cc0-4b26-9ab0-b8377dc5e2a6
+
+function TimeIntellignece__FullQuarter_Table_Function =
+		(
+		    t: anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Quarter_Sort =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Quarter Sort] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		       'EffectiveDate'[Fiscal Year]  = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Quarter Sort]
+		            = current_Fiscal_Quarter_Sort
+		    )
+		RETURN
+		    result
+	lineageTag: 42882a9b-71ff-46ac-a9d2-e5a19313105c
+
+function TimeIntellignece__FullYear_Table_Function =
+		(
+		    t:  anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year
+		    )
+		RETURN
+		    result
+	lineageTag: 98bb5ad6-55f9-4773-bda4-754f73199104
+
+function TimeIntellignece__MonthToDate_Table_Function =
+		(
+		    t:  anyref EXPR ,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Period_Number =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Period Number] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Period Number]
+		            = current_Fiscal_Period_Number
+		    )
+		RETURN
+		    result
+	lineageTag: 928f1508-60cc-4e95-bf5d-d37457b7d7ee
+
+function TimeIntellignece__QuarterToDate_Table_Function =
+		(
+		    t:  anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Quarter_Sort =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Quarter Sort] )
+		VAR current_Fiscal_Period_Number =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Period Number] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Quarter Sort]
+		            = current_Fiscal_Quarter_Sort,
+		        'EffectiveDate'[Fiscal Period Number]
+		            <= current_Fiscal_Period_Number
+		    )
+		RETURN
+		    result
+	lineageTag: ac838509-3456-40af-ab3c-c3c00590122f
+
+function TimeIntellignece__QuarterToGo_Table_Function =
+		(
+		    t:  anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Quarter_Sort =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Quarter Sort] )
+		VAR current_Fiscal_Period_Number =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Period Number] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Quarter Sort]
+		            = current_Fiscal_Quarter_Sort,
+		        'EffectiveDate'[Fiscal Period Number]
+		            > current_Fiscal_Period_Number
+		    )
+		RETURN
+		    result
+	lineageTag: 4290bd74-5b51-4c21-8a56-4e08f2e77661
+
+function TimeIntellignece__YearToDate_Table_Function =
+		(
+		    t:  anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Period_Number =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Period Number] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Period Number]
+		            <= current_Fiscal_Period_Number
+		    )
+		RETURN
+		    result
+	lineageTag: a2ea30d8-550b-43cd-83d6-e00698b6500c
+
+function TimeIntellignece__YearToGo_Table_Function =
+		(
+		    t:  anyref EXPR,
+		    offset_scalear_val: SCALAR VAL
+		) =>
+		VAR current_Fiscal_Year =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Year] )
+		        - offset_scalear_val
+		VAR current_Fiscal_Period_Number =
+		    SELECTEDVALUE( 'EffectiveDate'[Fiscal Period Number] )
+		VAR result =
+		    CALCULATETABLE(
+		        t,
+		        REMOVEFILTERS( 'EffectiveDate' ),
+		        'EffectiveDate'[Fiscal Year] = current_Fiscal_Year,
+		        'EffectiveDate'[Fiscal Period Number]
+		            > current_Fiscal_Period_Number
+		    )
+		RETURN
+		    result
+	lineageTag: ebe8a039-7f3a-494d-8a94-7d3807d993e1
+

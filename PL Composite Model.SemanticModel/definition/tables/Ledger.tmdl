@@ -1,0 +1,100 @@
+table Ledger
+	lineageTag: 1b299d8e-28a1-4d3e-8cd6-eff849775e9a
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 8b97dfbc-cdca-4c35-af2f-6b3fec6efbd3
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Account Key'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ddbd7322-bbea-4e45-8ecf-e9539a4ae67f
+		summarizeBy: count
+		sourceColumn: Account Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: b627b0a2-3147-4371-b41c-fa73e148906b
+		summarizeBy: sum
+		sourceColumn: Legal Entity
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditLessDebitatGlobalFx
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: e271cad1-8f21-4e0e-b3a5-a23db69346f9
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atGlobalFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditLessDebitatPYFx
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 53b81217-1240-4b13-9fc2-f24631647174
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atPYFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditLessDebitatFcstFx
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 8ebb8ad9-f615-4846-a11e-fb4d4972a339
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atFcstFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditLessDebitatPlanFx
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 79ba91f5-5065-454f-9285-b87cbb5ab107
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atPlanFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: dc7569c1-2267-488e-ba68-3aef015abcfc
+		summarizeBy: count
+		sourceColumn: DocumentID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ledger = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_Ledger = Source{[Schema="dbo",Item="Ledger"]}[Data]
+				in
+				    dbo_Ledger
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Fact
+

@@ -1,0 +1,38 @@
+table SelectedTimeFrame
+	lineageTag: 92a43a8d-09f5-41fa-a183-511f39ecf72b
+
+	column 'Time Horizon'
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 60cde3ec-29bb-4421-9fe2-7d350cdbef10
+		summarizeBy: none
+		sourceColumn: Time Horizon
+		sortByColumn: 'Time Horizon Sort Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Horizon Sort Order'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 367f6589-7714-46b9-a53b-3b264452f973
+		summarizeBy: sum
+		sourceColumn: Time Horizon Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SelectedTimeFrame = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3suhtjc2jfeetlts2zkltk2req-udjcjarbli5exd36i63aavtkfq.database.fabric.microsoft.com", "Profit and Loss-2a14e391-80af-4756-9153-2b0cc86a3a5d"),
+				    dbo_SelectedTimeFrame = Source{[Schema="dbo",Item="SelectedTimeFrame"]}[Data]
+				in
+				    dbo_SelectedTimeFrame
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+	annotation TabularEditor_TableGroup = Disconnected
+

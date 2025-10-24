@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Account","Commentary","FxAssumptions","EffectiveDate","Ledger","Layout","LegalEntity","LegalEntitySecurity","Scenario","SelectedTimeFrame","Scenario DQ","_Measures","_Measures_Hidden"]
+
+annotation __TEdtr = 1
+
+ref table Account
+ref table Commentary
+ref table FxAssumptions
+ref table EffectiveDate
+ref table Ledger
+ref table Layout
+ref table LegalEntity
+ref table LegalEntitySecurity
+ref table Scenario
+ref table SelectedTimeFrame
+ref table 'Scenario DQ'
+ref table _Measures
+ref table _Measures_Hidden
+ref table '__Field Paramater Self-Service Table Measures'
+
+ref cultureInfo en-US
+

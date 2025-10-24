@@ -1,0 +1,101 @@
+table Ledger
+	lineageTag: 7acea989-20a0-439b-82a7-0277125e4a1d
+	sourceLineageTag: [dbo].[Ledger]
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b48d3761-7060-4185-9df1-5db30a5da315
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: a24f485c-b432-4763-bb64-af1d64f9c490
+		sourceLineageTag: Account Key
+		summarizeBy: count
+		sourceColumn: Account Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c74025c-1e62-4ce7-9cd6-ed1415020d06
+		sourceLineageTag: Legal Entity
+		summarizeBy: sum
+		sourceColumn: Legal Entity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Credit_Less_Debit_atGlobalFx
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a55e761-5ba4-41bf-9db6-6493c74351a0
+		sourceLineageTag: Credit_Less_Debit_atGlobalFx
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atGlobalFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column Credit_Less_Debit_atPYFx
+		dataType: int64
+		formatString: 0
+		lineageTag: 76460714-83d0-4d82-be79-633ce2b033ac
+		sourceLineageTag: Credit_Less_Debit_atPYFx
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atPYFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column Credit_Less_Debit_atFcstFx
+		dataType: int64
+		formatString: 0
+		lineageTag: b98b2a5f-2c53-46b1-964a-6bb017b32890
+		sourceLineageTag: Credit_Less_Debit_atFcstFx
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atFcstFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column Credit_Less_Debit_atPlanFx
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f224372-ee34-4d29-bb05-782a8839d086
+		sourceLineageTag: Credit_Less_Debit_atPlanFx
+		summarizeBy: sum
+		sourceColumn: Credit_Less_Debit_atPlanFx
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentID
+		dataType: int64
+		formatString: 0
+		lineageTag: 263ee41a-4c00-44c9-8b65-ec29d4137768
+		sourceLineageTag: DocumentID
+		summarizeBy: count
+		sourceColumn: DocumentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSQL_System_Uniquifier_1938105945
+		dataType: int64
+		formatString: 0
+		lineageTag: d77fd9d3-3c32-4a63-90b0-bd6076e0c64c
+		sourceLineageTag: MSSQL_System_Uniquifier_1938105945
+		summarizeBy: sum
+		sourceColumn: MSSQL_System_Uniquifier_1938105945
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ledger = entity
+		mode: directLake
+		source
+			entityName: Ledger
+			schemaName: dbo
+			expressionSource: 'DirectLake - Profit and Loss'
+
